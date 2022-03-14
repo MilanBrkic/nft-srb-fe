@@ -1,6 +1,8 @@
 import './App.css';
 import  SigninButton  from './components/SigninButton'
 import {useEffect} from "react"
+import FileUploadComponent from './components/FileUploadCompenent';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   useEffect(() => {
@@ -10,7 +12,10 @@ function App() {
    }, []);
 
   return (
-    <SigninButton/>
+    <div>
+      <SigninButton/>
+      <FileUploadComponent/>
+    </div>
   );
 }
 

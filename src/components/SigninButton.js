@@ -1,8 +1,8 @@
 import React from 'react';
-import Constants from '../constants/Constants';
-import axios from 'axios';
+import backendHttpClient from '../http-client/BackendHttpClient';
 
 class SigninButton extends React.Component{
+
      handleClick = async () =>{
         const chainId = await window.ethereum.request({
             method:"eth_chainId"
@@ -13,14 +13,15 @@ class SigninButton extends React.Component{
             const accounts = await window.ethereum.request({
                 method:"eth_requestAccounts"
             })
-            const url = `${Constants.BACKEND_URL}/sign-in`;
-            const user = await axios.post(url, {accounts})
+            const url = '/sign-in';
+            const user = await backendHttpClient.post(url,{accounts})
             console.log(`Welcome user ${user.address}`)
         } 
         else{
             console.log("Connected to the wrong chain");
         } 
     }
+    
     render(){
         return(
             <button onClick={this.handleClick}>
