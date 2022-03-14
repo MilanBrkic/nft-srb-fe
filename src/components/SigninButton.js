@@ -14,7 +14,8 @@ class SigninButton extends React.Component{
                 method:"eth_requestAccounts"
             })
             const url = `${Constants.BACKEND_URL}/sign-in`;
-            await axios.post(url, {accounts})
+            const user = await axios.post(url, {accounts})
+            console.log(`Welcome user ${user.address}`)
         } 
         else{
             console.log("Connected to the wrong chain");
