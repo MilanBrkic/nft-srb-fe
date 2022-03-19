@@ -1,5 +1,6 @@
 import axios from "axios";
 import Constants from '../constants/Constants'
+
 class BackendHttpClient{
     axiosInstance
     backendUrl = Constants.BACKEND_URL;
