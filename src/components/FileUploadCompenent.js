@@ -23,7 +23,12 @@ export default class FileUploadComponent extends Component {
             const formData = new FormData();
             formData.append('image', image)
             formData.append('account', accounts[0])
-            await backendHttpClient.post("/mint", formData);
+            try {
+                await backendHttpClient.post("/mint", formData);
+                alert("Mint successful")
+            } catch (error) {
+                alert("Image already minted")
+            }
         }
         else{
             alert("You did not enter an image")
