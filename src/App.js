@@ -3,6 +3,7 @@ import  SigninButton  from './components/SigninButton'
 import {useEffect} from "react"
 import FileUploadComponent from './components/FileUploadCompenent';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import GetAllImages from './components/GetAllImages';
 
 function App() {
   useEffect(() => {
@@ -15,6 +16,7 @@ function App() {
     <div>
       <SigninButton/>
       <FileUploadComponent/>
+      <GetAllImages/>
     </div>
   );
 }
