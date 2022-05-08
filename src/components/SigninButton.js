@@ -7,9 +7,13 @@ class SigninButton extends React.Component{
      handleClick = async () =>{
         const url = '/sign-in';
         const accounts = await requestAccounts()
-
-        const user = await backendHttpClient.post(url,{accounts})
-        console.log(`Welcome user ${user.address}`)
+        try {
+            const user = await backendHttpClient.post(url,{accounts})
+            console.log(`Welcome user ${user.address}`)
+        } catch (error) {
+            console.log(`Error logging user in ${error.message}`)
+        }
+        
     }
     
     render(){

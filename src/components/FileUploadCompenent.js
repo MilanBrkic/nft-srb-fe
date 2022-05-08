@@ -1,3 +1,4 @@
+import { Axios, AxiosError } from 'axios';
 import React, { Component } from 'react';
 import { requestAccounts } from '../ethereum';
 import { isEmpty } from '../helper';
@@ -28,8 +29,15 @@ export default class FileUploadComponent extends Component {
                 await backendHttpClient.post("/mint", formData);
                 alert("Image will mint in a few minutes")
             } catch (error) {
-                console.log(error.response)
-                alert(`Error minting image: ${error.response.data}`)
+                if(error.response){
+                    console.log(error.response)
+                    alert(`Error minting image: ${error.response.data}`)
+                }
+                else{
+                    console.log(error)
+                    alert(`Error minting image: ${error}`)
+                }
+
             }
         }
         else{

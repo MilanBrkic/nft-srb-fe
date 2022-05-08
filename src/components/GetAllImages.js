@@ -15,12 +15,16 @@ export default class GetAllImages extends Component {
         const address = "0x70997970c51812dc3a010c7d01b50e0d17dc79c8";
         const url = `/user/${address}/images`;
         
+        try {
+            const images = await backendHttpClient.get(url)
+            const googleUrls = images.map(image=> Constants.GOOGLE_DRIVE_URL + image.googleId)
+            console.log(`getAllImages: ${JSON.stringify(googleUrls)}`)
+            this.state.images = googleUrls;
+            this.forceUpdate();
+        } catch (error) {
+            console.log(`Error in getting images | Reason: ${error.message}`)
+        }
 
-        const images = await backendHttpClient.get(url)
-        const googleUrls = images.map(image=> Constants.GOOGLE_DRIVE_URL + image.googleId)
-        console.log(`getAllImages: ${JSON.stringify(googleUrls)}`)
-        this.state.images = googleUrls;
-        this.forceUpdate();
     }
     
     render(){
