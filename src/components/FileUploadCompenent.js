@@ -18,7 +18,7 @@ export default class FileUploadComponent extends Component {
 
     handleClick = async () =>{
         const image =  this.state.image;
-        if(!isEmpty(image)){
+        if(image.name){
             this.resetFileState();
             const accounts = await requestAccounts();
             const formData = new FormData();
@@ -28,7 +28,8 @@ export default class FileUploadComponent extends Component {
                 await backendHttpClient.post("/mint", formData);
                 alert("Image will mint in a few minutes")
             } catch (error) {
-                alert("Image already minted")
+                console.log(error.response)
+                alert(`Error minting image: ${error.response.data}`)
             }
         }
         else{
