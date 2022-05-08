@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { requestAccounts } from '../ethereum';
+import { isEmpty } from '../helper';
 import backendHttpClient from '../http-client/BackendHttpClient';
 export default class FileUploadComponent extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class FileUploadComponent extends Component {
 
     handleClick = async () =>{
         const image =  this.state.image;
-        if(image){
+        if(!isEmpty(image)){
             this.resetFileState();
             const accounts = await requestAccounts();
             const formData = new FormData();
