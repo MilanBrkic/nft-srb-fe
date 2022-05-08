@@ -25,7 +25,7 @@ export default class FileUploadComponent extends Component {
             formData.append('account', accounts[0])
             try {
                 await backendHttpClient.post("/mint", formData);
-                alert("Mint successful")
+                alert("Image will mint in a few minutes")
             } catch (error) {
                 alert("Image already minted")
             }
