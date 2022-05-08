@@ -1,7 +1,5 @@
-import { Axios, AxiosError } from 'axios';
 import React, { Component } from 'react';
 import { requestAccounts } from '../ethereum';
-import { isEmpty } from '../helper';
 import backendHttpClient from '../http-client/BackendHttpClient';
 export default class FileUploadComponent extends Component {
     constructor(props) {
