@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { mint, requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
+
 export default class FileUploadComponent extends Component {
   constructor(props) {
     super(props);
@@ -20,12 +21,33 @@ export default class FileUploadComponent extends Component {
     const image = this.state.image;
     if (image.name) {
       this.resetFileState();
-      this.mint(image, 'name', 'descriptor').catch((error) => {
-        console.log(`Failed while minting | Reason: ${error.message}`);
-      });
-      alert('Minting should take a few minutes. Please wait...');
+      const shouldMint = await this.checkIfMinted(image);
+      if (shouldMint) {
+        this.mint(image, 'name', 'descriptor').catch((error) => {
+          console.log(`Failed while minting | Reason: ${error.message}`);
+        });
+        alert('Minting should take a few moments. Please wait...');
+      }
     } else {
       alert('You did not enter an image');
+    }
+  };
+
+  checkIfMinted = async (image) => {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    try {
+      await backendHttpClient.post('/image/status', formData);
+      return true;
+    } catch (error) {
+      if (error.response) {
+        alert(`Error minting image: ${error.response.data}`);
+      } else {
+        console.log(error);
+        alert(`Error minting image: ${error}`);
+      }
+      return false;
     }
   };
 
