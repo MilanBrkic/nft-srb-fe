@@ -1,4 +1,6 @@
 import Constants from "../constants/Constants";
+import {Contract, ethers} from "ethers"
+import nftSrbJson from '../nft-smart-contract/artifacts/contracts/NftSrb.sol/NftSrb.json'
 
 export async function requestAccounts(){
     const chainId = await getChainId();
@@ -17,4 +19,12 @@ async function getChainId(){
     return window.ethereum.request({
         method:"eth_chainId"
     })
+}
+
+export async function mint(url){
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner();
+
+    const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
+    await contract.mint(url);
 }

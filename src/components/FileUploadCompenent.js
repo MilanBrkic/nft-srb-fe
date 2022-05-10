@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { requestAccounts } from '../ethereum';
+import { mint, requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 export default class FileUploadComponent extends Component {
@@ -20,7 +20,9 @@ export default class FileUploadComponent extends Component {
         const image =  this.state.image;
         if(image.name){
             this.resetFileState();
-            this.mint(image, "name", "descriptor");
+            this.mint(image, "name", "descriptor").catch((error)=>{
+                console.log(`Failed while minting | Reason: ${error.message}`)
+            });
             alert("Minting should take a few minutes. Please wait...")
         }
         else{
@@ -30,6 +32,7 @@ export default class FileUploadComponent extends Component {
 
     mint = async(image,name,description)=>{
         const response = await store(image,name,description);
+        await mint(response.url);
         console.log(response);
     }
 
