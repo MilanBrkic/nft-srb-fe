@@ -34,10 +34,9 @@ export default class FileUploadComponent extends Component {
   };
 
   checkIfMinted = async (image) => {
-    const formData = new FormData();
-    formData.append('image', image);
-
     try {
+      const formData = new FormData();
+      formData.append('image', image);
       await backendHttpClient.post('/image/status', formData);
       return true;
     } catch (error) {
@@ -52,35 +51,32 @@ export default class FileUploadComponent extends Component {
   };
 
   mint = async (image, name, description) => {
-    const response = await store(image, name, description);
-    await mint(response.url);
-    console.log(response);
+    const nftstorageResponse = await store(image, name, description);
+    // await Promise.all([mint(nftstorageResponse.url), this.notifyOfMintCompletion(image, nftstorageResponse)]);
+    await this.notifyOfMintCompletion(image, nftstorageResponse)
   };
 
-  helpFunction = async () => {
-    const image = this.state.image;
-    if (image.name) {
-      this.resetFileState();
-      const accounts = await requestAccounts();
-      const formData = new FormData();
-      formData.append('image', image);
-      formData.append('account', accounts[0]);
-      try {
-        await backendHttpClient.post('/mint', formData);
-        alert('Image will mint in a few minutes');
-      } catch (error) {
+  notifyOfMintCompletion = async (image, nftstorageResponse) => {
+    const accounts = await requestAccounts();
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('account', accounts[0]);
+    formData.append('ipnft', nftstorageResponse.ipnft);
+    formData.append('url', nftstorageResponse.url);
+    try {
+      await backendHttpClient.post('/mint', formData);
+      console.log('Backend notified of image being minted');
+    } catch (error) {
         if (error.response) {
-          console.log(error.response);
-          alert(`Error minting image: ${error.response.data}`);
+            console.log(error.response);
+            alert(`Error minting image: ${error.response.data}`);
         } else {
-          console.log(error);
-          alert(`Error minting image: ${error}`);
+            console.log(error);
+            alert(`Error notifying backend: ${error}`);
         }
-      }
-    } else {
-      alert('You did not enter an image');
     }
   };
+
   resetFileState() {
     this.fileInput.current.value = null;
     this.setState({ image: null });

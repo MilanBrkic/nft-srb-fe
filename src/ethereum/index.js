@@ -26,4 +26,5 @@ export async function mint(url) {
 
   const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
   await contract.mint(url);
+  console.log(`NFT: ${url} minted`);
 }
