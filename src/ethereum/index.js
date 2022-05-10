@@ -1,30 +1,29 @@
-import Constants from "../constants/Constants";
-import {Contract, ethers} from "ethers"
-import nftSrbJson from '../nft-smart-contract/artifacts/contracts/NftSrb.sol/NftSrb.json'
+import Constants from '../constants/Constants';
+import { Contract, ethers } from 'ethers';
+import nftSrbJson from '../nft-smart-contract/artifacts/contracts/NftSrb.sol/NftSrb.json';
 
-export async function requestAccounts(){
-    const chainId = await getChainId();
+export async function requestAccounts() {
+  const chainId = await getChainId();
 
-    if(parseInt(chainId,16)===Constants.EXPECTED_CHAIN_ID){
-        return window.ethereum.request({
-            method:"eth_requestAccounts"
-        })
-    } 
-    else{
-        alert("Connected to a wrong network")
-    }
-}
-
-async function getChainId(){
+  if (parseInt(chainId, 16) === Constants.EXPECTED_CHAIN_ID) {
     return window.ethereum.request({
-        method:"eth_chainId"
-    })
+      method: 'eth_requestAccounts'
+    });
+  } else {
+    alert('Connected to a wrong network');
+  }
 }
 
-export async function mint(url){
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner();
+async function getChainId() {
+  return window.ethereum.request({
+    method: 'eth_chainId'
+  });
+}
 
-    const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
-    await contract.mint(url);
+export async function mint(url) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+
+  const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
+  await contract.mint(url);
 }
