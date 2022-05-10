@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Constants from '../constants/Constants';
 import { requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
