@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Constants from '../constants/Constants';
 import { requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
+import { store } from '../services/NFTStorage';
 export default class FileUploadComponent extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +18,23 @@ export default class FileUploadComponent extends Component {
     }
 
     handleClick = async () =>{
+        const image =  this.state.image;
+        if(image.name){
+            this.resetFileState();
+            this.mint(image, "name", "descriptor");
+            alert("Minting should take a few minutes. Please wait...")
+        }
+        else{
+            alert("You did not enter an image")
+        }
+    }
+
+    mint = async(image,name,description)=>{
+        const response = await store(image,name,description);
+        console.log(response);
+    }
+
+    helpFunction = async ()=>{
         const image =  this.state.image;
         if(image.name){
             this.resetFileState();
@@ -42,7 +61,6 @@ export default class FileUploadComponent extends Component {
             alert("You did not enter an image")
         }
     }
-
     resetFileState(){
         this.fileInput.current.value = null
         this.setState({image:null})
