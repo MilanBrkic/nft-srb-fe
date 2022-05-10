@@ -10,6 +10,9 @@ function App() {
     if (typeof window.ethereum !== 'undefined') {
       console.log('Web3 installed!');
     }
+    else{
+      alert("Web3 is not installed, please install to use the app");
+    }
   }, []);
 
   return (
