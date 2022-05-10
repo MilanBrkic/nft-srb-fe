@@ -52,9 +52,9 @@ export default class MintComponent extends Component {
 
   mint = async (image, name, description) => {
     const nftstorageResponse = await store(image, name, description);
-    console.log("Nft stored to ipfs");
+    console.log('Nft stored to ipfs');
     await Promise.all([mint(nftstorageResponse.url), this.notifyOfMintCompletion(image, nftstorageResponse)]);
-    
+
     alert(`Nft ${name} minted`);
   };
 
@@ -69,13 +69,13 @@ export default class MintComponent extends Component {
       await backendHttpClient.post('/mint', formData);
       console.log('Backend notified of image being minted');
     } catch (error) {
-        if (error.response) {
-            console.log(error.response);
-            alert(`Error minting image: ${error.response.data}`);
-        } else {
-            console.log(error);
-            alert(`Error notifying backend: ${error}`);
-        }
+      if (error.response) {
+        console.log(error.response);
+        alert(`Error minting image: ${error.response.data}`);
+      } else {
+        console.log(error);
+        alert(`Error notifying backend: ${error}`);
+      }
     }
   };
 
