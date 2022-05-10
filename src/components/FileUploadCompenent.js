@@ -37,7 +37,7 @@ export default class FileUploadComponent extends Component {
     try {
       const formData = new FormData();
       formData.append('image', image);
-      await backendHttpClient.post('/image/status', formData);
+      await backendHttpClient.post('/nft/status', formData);
       return true;
     } catch (error) {
       if (error.response) {
