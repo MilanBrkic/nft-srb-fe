@@ -3,7 +3,7 @@ import { mint, requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 
-export default class FileUploadComponent extends Component {
+export default class MintComponent extends Component {
   constructor(props) {
     super(props);
     this.onFileChange = this.onFileChange.bind(this);
@@ -52,8 +52,10 @@ export default class FileUploadComponent extends Component {
 
   mint = async (image, name, description) => {
     const nftstorageResponse = await store(image, name, description);
-    // await Promise.all([mint(nftstorageResponse.url), this.notifyOfMintCompletion(image, nftstorageResponse)]);
-    await this.notifyOfMintCompletion(image, nftstorageResponse)
+    console.log("Nft stored to ipfs");
+    await Promise.all([mint(nftstorageResponse.url), this.notifyOfMintCompletion(image, nftstorageResponse)]);
+    
+    alert(`Nft ${name} minted`);
   };
 
   notifyOfMintCompletion = async (image, nftstorageResponse) => {

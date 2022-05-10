@@ -1,9 +1,9 @@
 import './App.css';
 import SigninButton from './components/SigninButton';
 import { useEffect } from 'react';
-import FileUploadComponent from './components/FileUploadCompenent';
+import MintComponent from './components/MintCompenent';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import GetAllImages from './components/GetAllImages';
+import GetAllNfts from './components/GetAllNfts';
 
 function App() {
   useEffect(() => {
@@ -15,8 +15,8 @@ function App() {
   return (
     <div>
       <SigninButton />
-      <FileUploadComponent />
-      <GetAllImages />
+      <MintComponent />
+      <GetAllNfts />
     </div>
   );
 }
