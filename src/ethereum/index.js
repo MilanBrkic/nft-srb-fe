@@ -20,11 +20,11 @@ async function getChainId() {
   });
 }
 
-export async function mint(url) {
+export async function mint(url, price) {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
   const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
-  await contract.mint(url);
+  await contract.mint(url, price);
   console.log(`NFT: ${url} minted`);
 }

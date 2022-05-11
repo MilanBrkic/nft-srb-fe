@@ -23,7 +23,7 @@ export default class MintComponent extends Component {
       this.resetFileState();
       const shouldMint = await this.checkIfMinted(image);
       if (shouldMint) {
-        this.mint(image, 'name', 'descriptor').catch((error) => {
+        this.mint(image, 'name', 'descriptor', 100).catch((error) => {
           console.log(`Failed while minting | Reason: ${error.message}`);
         });
         alert('Minting should take a few moments. Please wait...');
@@ -50,21 +50,22 @@ export default class MintComponent extends Component {
     }
   };
 
-  mint = async (image, name, description) => {
+  mint = async (image, name, description, price) => {
     const nftstorageResponse = await store(image, name, description);
     console.log('Nft stored to ipfs');
-    await Promise.all([mint(nftstorageResponse.url), this.notifyOfMintCompletion(image, nftstorageResponse)]);
+    await Promise.all([mint(nftstorageResponse.url, price), this.notifyOfMintCompletion(image, nftstorageResponse, price)]);
 
     alert(`Nft ${name} minted`);
   };
 
-  notifyOfMintCompletion = async (image, nftstorageResponse) => {
+  notifyOfMintCompletion = async (image, nftstorageResponse, price) => {
     const accounts = await requestAccounts();
     const formData = new FormData();
     formData.append('image', image);
     formData.append('account', accounts[0]);
     formData.append('ipnft', nftstorageResponse.ipnft);
     formData.append('url', nftstorageResponse.url);
+    formData.append('price', price);
     try {
       await backendHttpClient.post('/mint', formData);
       console.log('Backend notified of image being minted');
