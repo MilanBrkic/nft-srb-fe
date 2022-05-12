@@ -1,8 +1,6 @@
 body{background-color: #d9e7ff;}
 
-div {        
-    display: 'flex';
-    justify-content: 'center';
-    align-items: 'center';
-    height: '90vh';
+.main-div {        
+    display: flex;
+    justify-content: center;
 }

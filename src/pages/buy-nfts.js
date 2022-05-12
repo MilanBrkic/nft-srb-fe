@@ -3,7 +3,7 @@ import './pages.css'
 
 const BuyNfts = () => {
   return (
-    <div>
+    <div className="main-div">
       <h1>Buy Nfts</h1>
     </div>
   );

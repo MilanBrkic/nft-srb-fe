@@ -1,9 +1,11 @@
 import React from 'react';
+import MintComponent from '../components/MintCompenent';
+import './pages.css'
 
 const MintNfts = () => {
   return (
-    <div>
-      <h1>Mint Nfts</h1>
+    <div className="main-div">
+      <MintComponent />
     </div>
   );
 };
