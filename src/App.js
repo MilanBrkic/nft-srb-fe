@@ -4,6 +4,13 @@ import { useEffect } from 'react';
 import MintComponent from './components/MintCompenent';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import GetAllNfts from './components/GetAllNfts';
+import NftSrb from './pages';
+import BuyNfts from './pages/buy-nfts';
+import MyCollection from './pages/my-collection';
+import MintNfts from './pages/mint-nfts';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   useEffect(() => {
@@ -16,10 +23,20 @@ function App() {
   }, []);
 
   return (
+    
     <div>
-      <SigninButton />
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path='/' exact component={NftSrb} />
+        <Route path='/buy-nfts' component={BuyNfts} />
+        <Route path='/my-collection' component={MyCollection} />
+        <Route path='/mint-nfts' component={MintNfts} />
+      </Routes>
+    </Router>
+      {/* <SigninButton />
       <MintComponent />
-      <GetAllNfts />
+      <GetAllNfts /> */}
     </div>
   );
 }
