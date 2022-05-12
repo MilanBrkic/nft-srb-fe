@@ -20,7 +20,7 @@ export default class GetAllNfts extends Component {
     try {
       const nfts = await backendHttpClient.get(url);
       const googleUrls = nfts.map((nft) => Constants.GOOGLE_DRIVE_URL + nft.googleId);
-      console.log(`getAllImages: ${JSON.stringify(googleUrls)}`);
+      console.debug(`getAllImages: ${JSON.stringify(googleUrls)}`);
       this.state.nfts = googleUrls;
       this.forceUpdate();
     } catch (error) {
@@ -30,7 +30,7 @@ export default class GetAllNfts extends Component {
 
   render() {
     const arrList = this.state.nfts.map((nft) => {
-      return <img key={`${nft}`} src={`${nft}`} alt="" width="300" />;
+      return <img key={`${nft}`} src={`${nft}`} alt="" height="300" width="300" />;
     });
     return (
       <div>

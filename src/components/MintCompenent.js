@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { mint, requestAccounts } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
+import { checkAspectRatio, checkIfFileIsAnImage } from '../helper';
 
 export default class MintComponent extends Component {
   constructor(props) {
@@ -19,7 +20,11 @@ export default class MintComponent extends Component {
 
   handleClick = async () => {
     const image = this.state.image;
-    if (image.name) {
+    try {
+      if(!image.name) throw Error("No image chosen");      
+      checkIfFileIsAnImage(image);
+      await checkAspectRatio(image)
+
       this.resetFileState();
       const shouldMint = await this.checkIfMinted(image);
       if (shouldMint) {
@@ -28,10 +33,13 @@ export default class MintComponent extends Component {
         });
         alert('Minting should take a few moments. Please wait...');
       }
-    } else {
-      alert('You did not enter an image');
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      alert(`Error: ${error.message}`)
     }
   };
+
+
 
   checkIfMinted = async (image) => {
     try {
@@ -53,19 +61,39 @@ export default class MintComponent extends Component {
   mint = async (image, name, description, price) => {
     const nftstorageResponse = await store(image, name, description);
     console.log('Nft stored to ipfs');
-    await Promise.all([mint(nftstorageResponse.url, price), this.notifyOfMintCompletion(image, nftstorageResponse, price)]);
-
-    alert(`Nft ${name} minted`);
+    try {
+      await mint(nftstorageResponse.url, price) 
+      await this.notifyOfMintCompletion(image, nftstorageResponse, price);
+      alert(`Nft ${name} minted`);
+    } catch (error) {
+      console.error(`Minting failed: ${error.message}`);
+      alert("Minting failed")
+      await this.unlockNft(image);
+    }
   };
 
+  unlockNft = async(image)=>{
+    const formData = new FormData();
+    formData.append('image',image);
+    try {
+      await backendHttpClient.post('/nft/unlock', formData);
+    } catch (error) {
+      if (error.response) {
+        alert(`Error sending unlock request: ${error.response.data}`);
+      } else {
+        console.log(error);
+        alert(`Error sending unlock request: ${error}`);
+      }
+    }
+  }
   notifyOfMintCompletion = async (image, nftstorageResponse, price) => {
     const accounts = await requestAccounts();
     const formData = new FormData();
     formData.append('image', image);
     formData.append('account', accounts[0]);
     formData.append('ipnft', nftstorageResponse.ipnft);
-    formData.append('url', nftstorageResponse.url);
     formData.append('price', price);
+
     try {
       await backendHttpClient.post('/mint', formData);
       console.log('Backend notified of image being minted');
