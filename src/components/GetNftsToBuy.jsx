@@ -9,9 +9,11 @@ export default class GetNftsToBuy extends Component {
     this.state = {
       nfts: []
     };
+
+    this.getMarketplace();
   }
 
-  handleClick = async () => {
+  getMarketplace = async () => {
     const accounts = await requestAccounts();
 
     const address = accounts[0];
@@ -34,7 +36,6 @@ export default class GetNftsToBuy extends Component {
     });
     return (
       <div>
-        <button onClick={this.handleClick}>Get Nfts to buy</button>
         <div>{arrList}</div>
       </div>
     );
