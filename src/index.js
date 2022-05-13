@@ -14,14 +14,14 @@ ReactDOM.render(
 
 window.ethereum.on('accountsChanged', function (changedAddress) {
   const previousAddress = getAddress();
-  if(previousAddress){
-    if(changedAddress!==previousAddress){
+  if (previousAddress) {
+    if (changedAddress !== previousAddress) {
       alert("Wallet changed, we'll need to disconnect you, please reconnect again");
       removeAllCookies();
       window.location.reload();
     }
   }
-})
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
