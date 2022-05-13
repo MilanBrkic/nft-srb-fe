@@ -4,7 +4,7 @@ import './pages.css';
 const NftSrb = () => {
   return (
     <div className="main-div">
-      <h1>NftSrb</h1>
+      <img src={require('../images/nftsrb-logo.png')} alt='da'></img>
     </div>
   );
 };

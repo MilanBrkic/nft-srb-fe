@@ -24,3 +24,7 @@ export function checkIfFileIsAnImage(image) {
     throw Error('File is not an image type');
   }
 }
+
+export function trimAddress(address){
+   return address.slice(0,5) + "..." + address.slice(address.length-3,address.length)
+}
