@@ -3,6 +3,7 @@ import { mint } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 import { checkAspectRatio, checkIfFileIsAnImage } from '../helper';
+import { parseEther } from 'ethers/lib/utils';
 
 export default class MintComponent extends Component {
   constructor(props) {
@@ -10,13 +11,18 @@ export default class MintComponent extends Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.fileInput = React.createRef();
     this.state = {
-      image: {}
+      image: {},
+      price: undefined,
+      name: undefined,
+      description: undefined
     };
   }
 
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
   }
+
+  
 
   handleClick = async () => {
     const image = this.state.image;
@@ -25,10 +31,9 @@ export default class MintComponent extends Component {
       checkIfFileIsAnImage(image);
       await checkAspectRatio(image)
 
-      this.resetFileState();
       const shouldMint = await this.checkIfMinted(image);
       if (shouldMint) {
-        this.mint(image, 'name', 'descriptor', 100).catch((error) => {
+        this.mint(image, this.state.name, this.state.description, this.state.price).catch((error) => {
           console.log(`Failed while minting | Reason: ${error.message}`);
         });
         alert('Minting should take a few moments. Please wait...');
@@ -39,6 +44,14 @@ export default class MintComponent extends Component {
     }
   };
 
+  /*
+  checkFields = ()=>{
+    if(this.state.name.length>20) // TODO warn msg
+
+    if(this.state.price>1000) // TODO warn msg
+    if(this.state.description.length>140) // TODO warn msg
+  }
+  */
 
 
   checkIfMinted = async (image) => {
@@ -59,11 +72,13 @@ export default class MintComponent extends Component {
   };
 
   mint = async (image, name, description, price) => {
+    this.resetFileState();
     const nftstorageResponse = await store(image, name, description);
     console.log('Nft stored to ipfs');
+
     try {
-      await mint(nftstorageResponse.url, price) 
-      await this.notifyOfMintCompletion(image, nftstorageResponse, price);
+      await mint(nftstorageResponse.url, parseEther(price))
+      await this.notifyOfMintCompletion(image, nftstorageResponse, Number(price));
       alert(`Nft ${name} minted`);
     } catch (error) {
       console.error(`Minting failed: ${error.message}`);
@@ -103,7 +118,8 @@ export default class MintComponent extends Component {
 
   resetFileState() {
     this.fileInput.current.value = null;
-    this.setState({ image: null });
+    this.setState({ image: null, name: undefined, description:undefined, price:undefined});
+    this.forceUpdate();
   }
 
   render() {
@@ -118,6 +134,22 @@ export default class MintComponent extends Component {
             <button className="btn btn-primary" onClick={this.handleClick}>
               Mint
             </button>
+
+            <label htmlFor="nft-description">Description</label>
+            <textarea name="" id="nft-description" cols="30" rows="3" value={this.state.description}
+            onChange={(event)=>{
+              this.state.description = event.target.value;
+            }}/>
+
+            <label htmlFor="nft-name">Name</label>
+            <input type="text" name="" value={this.state.name} id="nft-name" onChange={(event)=>{
+              this.state.name = event.target.value;
+            }}/>
+
+            <label htmlFor="nft-price">Price in ETH</label>
+            <input type="text" name="" value={this.state.price} id="nft-price" onChange={(event)=>{
+              this.state.price = event.target.value;
+            }}/>
           </div>
         </div>
       </div>

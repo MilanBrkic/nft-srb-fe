@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import Constants from '../constants/Constants';
 import backendHttpClient from '../http-client/BackendHttpClient';
-import { requestAccounts } from '../ethereum';
 
 export default class GetAllNfts extends Component {
   constructor(props) {
