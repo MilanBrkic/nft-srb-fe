@@ -5,13 +5,13 @@ import './pages.css';
 
 export default class BuyNfts extends React.Component {
   render() {
-    const returable =  ()=>{
+    const returnable = (
       <div className="main-div">
         <h1>Buy Nfts</h1>
         <GetNftsToBuy />
       </div>
-    }
+    )
 
-    return redirectToHomePageIfNeeded(returable);
+    return redirectToHomePageIfNeeded(returnable)
   }
 }

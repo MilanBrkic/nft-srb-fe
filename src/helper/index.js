@@ -33,6 +33,6 @@ export function trimAddress(address) {
 }
 
 export function redirectToHomePageIfNeeded(toReturn){
-  if(getAccessToken())return toReturn;
-  else return (<Redirect to='/'/>)
+  if(getAccessToken()) return toReturn;
+  else return <Redirect to='/'/>
 }
