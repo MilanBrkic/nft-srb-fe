@@ -10,21 +10,21 @@ class BackendHttpClient {
     this.axiosInstance = axios;
   }
 
-  getHeaders(){
+  getHeaders() {
     const token = getAccessToken();
-    return { Authorization: `Bearer ${token}`}
+    return { Authorization: `Bearer ${token}` };
   }
 
   async post(url, data, config) {
     const modifiedUrl = this.backendUrl + url;
     const headers = this.getHeaders();
-    return (await this.axiosInstance.post(modifiedUrl, data, {...config, headers })).data;
+    return (await this.axiosInstance.post(modifiedUrl, data, { ...config, headers })).data;
   }
 
   async get(url, config) {
     const modifiedUrl = this.backendUrl + url;
     const headers = this.getHeaders();
-    return (await this.axiosInstance.get(modifiedUrl, {...config, headers})).data;
+    return (await this.axiosInstance.get(modifiedUrl, { ...config, headers })).data;
   }
 }
 

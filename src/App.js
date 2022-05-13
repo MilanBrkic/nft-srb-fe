@@ -9,8 +9,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export default class App extends React.Component {
-  
-  componentDidMount(){
+  componentDidMount() {
     if (typeof window.ethereum !== 'undefined') {
       console.log('Web3 installed!');
     } else {
@@ -18,7 +17,7 @@ export default class App extends React.Component {
     }
   }
 
-  render(){
+  render() {
     return (
       <div>
         <Router>
@@ -34,4 +33,3 @@ export default class App extends React.Component {
     );
   }
 }
-

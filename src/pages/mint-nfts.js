@@ -3,11 +3,11 @@ import MintComponent from '../components/MintCompenent';
 import './pages.css';
 
 export default class MintNfts extends React.Component {
-  render(){
-  return (
-    <div className="main-div">
-      <MintComponent />
-    </div>
-  );
+  render() {
+    return (
+      <div className="main-div">
+        <MintComponent />
+      </div>
+    );
   }
-};
+}
