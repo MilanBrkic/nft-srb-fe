@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { mint, requestAccounts } from '../ethereum';
+import { mint } from '../ethereum';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 import { checkAspectRatio, checkIfFileIsAnImage } from '../helper';

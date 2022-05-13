@@ -1,3 +1,6 @@
+import { Redirect } from "react-router-dom";
+import { getAccessToken } from "../services/Cookie";
+
 export function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -27,4 +30,9 @@ export function checkIfFileIsAnImage(image) {
 
 export function trimAddress(address) {
   return address.slice(0, 5) + '...' + address.slice(address.length - 3, address.length);
+}
+
+export function redirectToHomePageIfNeeded(toReturn){
+  if(getAccessToken())return toReturn;
+  else return (<Redirect to='/'/>)
 }
