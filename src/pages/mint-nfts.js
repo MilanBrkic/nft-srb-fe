@@ -1,6 +1,6 @@
 import React from 'react';
 import MintComponent from '../components/MintCompenent';
-import './pages.css'
+import './pages.css';
 
 const MintNfts = () => {
   return (

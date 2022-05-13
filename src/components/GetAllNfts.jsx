@@ -10,7 +10,10 @@ export default class GetAllNfts extends Component {
       nfts: []
     };
 
-    this.getMyCollection()
+  }
+
+  componentDidMount(){
+    this.getMyCollection();
   }
 
   getMyCollection = async () => {

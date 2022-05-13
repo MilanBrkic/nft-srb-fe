@@ -9,7 +9,9 @@ export default class GetNftsToBuy extends Component {
     this.state = {
       nfts: []
     };
+  }
 
+  componentDidMount(){
     this.getMarketplace();
   }
 

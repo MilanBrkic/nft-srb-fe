@@ -15,7 +15,7 @@ class SigninButton extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleClick}>Sign-in</button>;
+    return <button id="sign-in-btn" onClick={this.handleClick}>Sign-in</button>;
   }
 }
 export default SigninButton;
