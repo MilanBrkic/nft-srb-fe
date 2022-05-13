@@ -1,15 +1,9 @@
 import React from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { requestAccounts } from '../ethereum';
-import {trimAddress} from '../helper'
+import {  getAddress, setAccessToken, setAddress, removeAllCookies } from '../services/Cookie';
 class Auth extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      text: "Authenticate",
-    }
-  }
-  handleClick = async () => {
+  handleOnConnect = async () => {
     const url = '/auth';
     const accounts = await requestAccounts();
     try {
@@ -21,14 +15,28 @@ class Auth extends React.Component {
     }
   };
 
+  handleOnDisconnect = async()=>{
+    removeAllCookies();
+    this.props.onAuth();
+    this.forceUpdate();
+  }
   auth = (address, accessId)=>{
-    this.props.onAuth(accessId);
-    this.setState({text: trimAddress(address)});
+    setAccessToken(accessId);
+    setAddress(address);
+    this.props.onAuth();
     this.forceUpdate();
   }
 
   render() {
-    return <button id="auth-btn" onClick={this.handleClick}>{this.state.text}</button>;
+    return ( 
+      <div>
+        {
+          getAddress() ?
+          <button id="auth-btn" onClick={this.handleOnDisconnect}>Disconnect</button> :
+          <button id="auth-btn" onClick={this.handleOnConnect}>Connect</button> 
+        }
+      </div>
+    )
   }
 }
 export default Auth;

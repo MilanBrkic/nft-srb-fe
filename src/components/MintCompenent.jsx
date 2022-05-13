@@ -72,6 +72,19 @@ export default class MintComponent extends Component {
     }
   };
 
+  notifyOfMintCompletion = async (image, nftstorageResponse, price) => {
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('ipnft', nftstorageResponse.ipnft);
+    formData.append('price', price);
+
+    try {
+      await backendHttpClient.post('/mint', formData);
+      console.log('Backend notified of image being minted');
+    } catch (error) {
+      throw Error(`Error notifying Backend | Reason: ${error.message}`)
+    }
+  };
   unlockNft = async(image)=>{
     const formData = new FormData();
     formData.append('image',image);
@@ -86,27 +99,7 @@ export default class MintComponent extends Component {
       }
     }
   }
-  notifyOfMintCompletion = async (image, nftstorageResponse, price) => {
-    const accounts = await requestAccounts();
-    const formData = new FormData();
-    formData.append('image', image);
-    formData.append('account', accounts[0]);
-    formData.append('ipnft', nftstorageResponse.ipnft);
-    formData.append('price', price);
 
-    try {
-      await backendHttpClient.post('/mint', formData);
-      console.log('Backend notified of image being minted');
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response);
-        alert(`Error minting image: ${error.response.data}`);
-      } else {
-        console.log(error);
-        alert(`Error notifying backend: ${error}`);
-      }
-    }
-  };
 
   resetFileState() {
     this.fileInput.current.value = null;

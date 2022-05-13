@@ -17,10 +17,7 @@ export default class GetAllNfts extends Component {
   }
 
   getMyCollection = async () => {
-    const accounts = await requestAccounts();
-
-    const address = accounts[0];
-    const url = `/user/${address}/nfts`;
+    const url = `/user/nfts`;
 
     try {
       const nfts = await backendHttpClient.get(url);

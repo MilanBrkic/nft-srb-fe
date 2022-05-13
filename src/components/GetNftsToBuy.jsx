@@ -16,10 +16,7 @@ export default class GetNftsToBuy extends Component {
   }
 
   getMarketplace = async () => {
-    const accounts = await requestAccounts();
-
-    const address = accounts[0];
-    const url = `/marketplace/${address}`;
+    const url = `/marketplace`;
 
     try {
       const nfts = await backendHttpClient.get(url);

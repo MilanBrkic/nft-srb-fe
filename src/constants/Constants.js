@@ -7,5 +7,6 @@ class Constants {
   static NFT_STORAGE_KEY = process.env.REACT_APP_NFT_STORAGE_KEY;
   static CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
   static SMART_CONTRACT_URL = process.env.SMART_CONTRACT_URL ?? 'http://127.0.0.1:8545/';
+  static JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 }
 export default Constants;
