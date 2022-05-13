@@ -2,9 +2,9 @@ import React from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import { requestAccounts } from '../ethereum';
 
-class SigninButton extends React.Component {
+class Auth extends React.Component {
   handleClick = async () => {
-    const url = '/sign-in';
+    const url = '/auth';
     const accounts = await requestAccounts();
     try {
       const user = await backendHttpClient.post(url, { accounts });
@@ -15,7 +15,7 @@ class SigninButton extends React.Component {
   };
 
   render() {
-    return <button id="sign-in-btn" onClick={this.handleClick}>Sign-in</button>;
+    return <button id="auth-btn" onClick={this.handleClick}>Authenticate</button>;
   }
 }
-export default SigninButton;
+export default Auth;

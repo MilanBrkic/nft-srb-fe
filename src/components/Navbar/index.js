@@ -1,6 +1,6 @@
 import React from 'react';
-import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './NavbarElements';
-import SigninButton from '../SigninButton';
+import { Nav, NavLink, Bars, NavMenu } from './NavbarElements';
+import Auth from '../Auth';
 
 const Navbar = () => {
   return (
@@ -11,19 +11,19 @@ const Navbar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to="/" activeStyle>
+          <NavLink to="/">
             Nft Srb
           </NavLink>
-          <NavLink to="/buy-nfts" activeStyle>
+          <NavLink to="/buy-nfts">
             Buy Nfts
           </NavLink>
-          <NavLink to="/my-collection" activeStyle>
+          <NavLink to="/my-collection">
             My Collection
           </NavLink>
-          <NavLink to="/mint-nfts" activeStyle>
+          <NavLink to="/mint-nfts">
             Mint Nfts
           </NavLink>
-          <SigninButton />
+          <Auth />
         </NavMenu>
       </Nav>
     </>

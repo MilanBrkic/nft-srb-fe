@@ -5,7 +5,7 @@ body{background-color: #d9e7ff;}
     justify-content: center;
 }
 
-#sign-in-btn{
+#auth-btn{
     border-radius: 4px;
   background: #256ce1;
   padding: 10px 22px;
@@ -19,7 +19,7 @@ body{background-color: #d9e7ff;}
   margin-left: 24px;
 }
 
-#sign-in-btn:hover{
+#auth-btn:hover{
         transition: all 0.2s ease-in-out;
         background: #BFD7FF;
         color: #010606;
