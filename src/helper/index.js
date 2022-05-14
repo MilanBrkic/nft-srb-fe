@@ -11,7 +11,7 @@ export async function checkAspectRatio(file) {
     const img = new Image();
     var objectUrl = _URL.createObjectURL(file);
     img.onload = function () {
-      if (this.width !== this.height) {
+      if (Math.abs(this.width - this.height)>5) {
         reject(new Error('Image must be 1x1 aspect ration'));
       }
 

@@ -25,25 +25,23 @@ export default class MintComponent extends Component {
   
 
   handleClick = async () => {
-    this.resetFileState();
+    const image = this.state.image;
+    try {
+      if(!image.name) throw Error("No image chosen");      
+      checkIfFileIsAnImage(image);
+      await checkAspectRatio(image)
 
-    // const image = this.state.image;
-    // try {
-    //   if(!image.name) throw Error("No image chosen");      
-    //   checkIfFileIsAnImage(image);
-    //   await checkAspectRatio(image)
-
-    //   const shouldMint = await this.checkIfMinted(image);
-    //   if (shouldMint) {
-    //     this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
-    //       console.log(`Failed while minting | Reason: ${error.message}`);
-    //     });
-    //     alert('Minting should take a few moments. Please wait...');
-    //   }
-    // } catch (error) {
-    //   console.error(`Error: ${error.message}`);
-    //   alert(`Error: ${error.message}`)
-    // }
+      const shouldMint = await this.checkIfMinted(image);
+      if (shouldMint) {
+        this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
+          console.log(`Failed while minting | Reason: ${error.message}`);
+        });
+        alert('Minting should take a few moments. Please wait...');
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      alert(`Error: ${error.message}`)
+    }
   };
 
   /*
