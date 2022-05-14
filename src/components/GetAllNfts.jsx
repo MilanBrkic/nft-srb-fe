@@ -1,13 +1,14 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import Nft from './Nft';
-import './css/Nft.css'
 
 
 export default class GetAllNfts extends Component {
   constructor(props) {
     super(props);
+    this.myRef = React.createRef();
     this.state = {
+      enlargeView: false,
       nfts: []
     };
 
@@ -28,15 +29,28 @@ export default class GetAllNfts extends Component {
     }
   };
 
+  onEditBtn = (md5Hash)=>{
+    this.state.nfts.forEach((nft)=>{
+      if(nft.md5Hash === md5Hash){
+        nft.visible = true;
+      }
+      else nft.visible = false;
+    })
+    console.log((this.state));
+    this.state.enlargeView = true;
+    this.forceUpdate();
+  }
+
   render() {
-    const arrList = this.state.nfts.map((nft) => {
-      return <Nft key={nft.md5Hash} nft={nft}/>;
-    });
-    return (
-      <div className='grid-container'>
-        {arrList}
-      </div>
-    );
+    let arrList
+      arrList = this.state.nfts.map((nft) => {
+        return <Nft onEdit={this.onEditBtn} visible={nft.visible} key={nft.md5Hash} nft={nft}/>;
+      });
+      return (
+        <div className='grid-container'>
+          {arrList}
+        </div>
+      );
   }
 }
 

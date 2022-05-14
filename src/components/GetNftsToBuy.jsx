@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import Nft from './Nft';
-import './css/Nft.css'
 export default class GetNftsToBuy extends Component {
   constructor(props) {
     super(props);
