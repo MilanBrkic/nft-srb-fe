@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import Constants from '../constants/Constants';
 import backendHttpClient from '../http-client/BackendHttpClient';
+import Nft from './Nft';
+import './css/Nft.css'
+
 
 export default class GetAllNfts extends Component {
   constructor(props) {
@@ -17,12 +19,9 @@ export default class GetAllNfts extends Component {
 
   getMyCollection = async () => {
     const url = `/user/nfts`;
-
     try {
       const nfts = await backendHttpClient.get(url);
-      const googleUrls = nfts.map((nft) => Constants.GOOGLE_DRIVE_URL + nft.googleId);
-      console.debug(`getAllImages: ${JSON.stringify(googleUrls)}`);
-      this.state.nfts = googleUrls;
+      this.state.nfts = nfts;
       this.forceUpdate();
     } catch (error) {
       console.log(`Error in getting nfts | Reason: ${error.message}`);
@@ -31,11 +30,11 @@ export default class GetAllNfts extends Component {
 
   render() {
     const arrList = this.state.nfts.map((nft) => {
-      return <img key={`${nft}`} src={`${nft}`} alt="" height="300" width="300" />;
+      return <Nft key={nft.md5Hash} nft={nft}/>;
     });
     return (
-      <div>
-        <div>{arrList}</div>
+      <div className='grid-container'>
+        {arrList}
       </div>
     );
   }

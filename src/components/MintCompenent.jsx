@@ -12,9 +12,9 @@ export default class MintComponent extends Component {
     this.fileInput = React.createRef();
     this.state = {
       image: {},
-      price: undefined,
-      name: undefined,
-      description: undefined
+      price: '',
+      name: '',
+      description: ''
     };
   }
 
@@ -25,23 +25,25 @@ export default class MintComponent extends Component {
   
 
   handleClick = async () => {
-    const image = this.state.image;
-    try {
-      if(!image.name) throw Error("No image chosen");      
-      checkIfFileIsAnImage(image);
-      await checkAspectRatio(image)
+    this.resetFileState();
 
-      const shouldMint = await this.checkIfMinted(image);
-      if (shouldMint) {
-        this.mint(image, this.state.name, this.state.description, this.state.price).catch((error) => {
-          console.log(`Failed while minting | Reason: ${error.message}`);
-        });
-        alert('Minting should take a few moments. Please wait...');
-      }
-    } catch (error) {
-      console.error(`Error: ${error.message}`);
-      alert(`Error: ${error.message}`)
-    }
+    // const image = this.state.image;
+    // try {
+    //   if(!image.name) throw Error("No image chosen");      
+    //   checkIfFileIsAnImage(image);
+    //   await checkAspectRatio(image)
+
+    //   const shouldMint = await this.checkIfMinted(image);
+    //   if (shouldMint) {
+    //     this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
+    //       console.log(`Failed while minting | Reason: ${error.message}`);
+    //     });
+    //     alert('Minting should take a few moments. Please wait...');
+    //   }
+    // } catch (error) {
+    //   console.error(`Error: ${error.message}`);
+    //   alert(`Error: ${error.message}`)
+    // }
   };
 
   /*
@@ -118,7 +120,8 @@ export default class MintComponent extends Component {
 
   resetFileState() {
     this.fileInput.current.value = null;
-    this.setState({ image: null, name: undefined, description:undefined, price:undefined});
+    this.state = {image:{}, name: "", description:"", price:""}
+    console.log(this.state);
     this.forceUpdate();
   }
 
@@ -136,18 +139,18 @@ export default class MintComponent extends Component {
             </button>
 
             <label htmlFor="nft-description">Description</label>
-            <textarea name="" id="nft-description" cols="30" rows="3" value={this.state.description}
+            <textarea name="" id="nft-description" cols="30" rows="3"
             onChange={(event)=>{
               this.state.description = event.target.value;
             }}/>
 
             <label htmlFor="nft-name">Name</label>
-            <input type="text" name="" value={this.state.name} id="nft-name" onChange={(event)=>{
+            <input type="text" name=""  id="nft-name" onChange={(event)=>{
               this.state.name = event.target.value;
             }}/>
 
             <label htmlFor="nft-price">Price in ETH</label>
-            <input type="text" name="" value={this.state.price} id="nft-price" onChange={(event)=>{
+            <input type="text" name="" id="nft-price" onChange={(event)=>{
               this.state.price = event.target.value;
             }}/>
           </div>
