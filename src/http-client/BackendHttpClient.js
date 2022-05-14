@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Constants from '../constants/Constants';
-import { getAccessToken } from '../services/Cookie';
+import { getAccessToken, removeAllCookies } from '../services/Cookie';
 
 class BackendHttpClient {
   axiosInstance;
@@ -18,13 +18,31 @@ class BackendHttpClient {
   async post(url, data, config) {
     const modifiedUrl = this.backendUrl + url;
     const headers = this.getHeaders();
-    return (await this.axiosInstance.post(modifiedUrl, data, { ...config, headers })).data;
+    try {
+      return (await this.axiosInstance.post(modifiedUrl, data, { ...config, headers })).data;
+    } catch (error) {
+      this.checkForUnauthorizedError(error);
+      throw error;
+    }
   }
 
   async get(url, config) {
     const modifiedUrl = this.backendUrl + url;
     const headers = this.getHeaders();
-    return (await this.axiosInstance.get(modifiedUrl, { ...config, headers })).data;
+    try {
+      return (await this.axiosInstance.get(modifiedUrl, { ...config, headers })).data;
+    } catch (error) {
+      this.checkForUnauthorizedError(error);
+      throw error;
+    }
+  }
+
+  checkForUnauthorizedError(error) {
+    if (error.response && error.response.status === 401) {
+      alert('Connection expired, disconnecting');
+      removeAllCookies();
+      window.location.reload();
+    }
   }
 }
 
