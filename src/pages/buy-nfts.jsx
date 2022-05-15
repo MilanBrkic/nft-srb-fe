@@ -7,7 +7,7 @@ export default class BuyNfts extends React.Component {
   render() {
     const returnable = (
       <div className="main-div">
-        <h1 className='my-collection-h1'>Buy Nfts</h1>
+        <h1 className='my-collection-h1'>buy nfts</h1>
         <GetNftsToBuy />
       </div>
     )

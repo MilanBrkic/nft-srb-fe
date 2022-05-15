@@ -7,7 +7,7 @@ export default class MyCollection extends React.Component {
   render() {
     const returnable =  (
       <div className="main-div">
-        <h1 className="my-collection-h1">My Collection</h1>
+        <h1 className="my-collection-h1">my collection</h1>
         <GetAllNfts />
       </div>
     );

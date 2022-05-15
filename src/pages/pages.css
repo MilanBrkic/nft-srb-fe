@@ -1,5 +1,5 @@
 body{
-  background-color: #d9e7ff;
+  background-color: var(--background-color);
 }
 
 .main-div {        
@@ -9,7 +9,7 @@ body{
 
 #auth-btn{
   border-radius: 4px;
-  background: #256ce1;
+  background: var(--btn-color);
   padding: 10px 22px;
   color: #fff;
   outline: none;
@@ -23,7 +23,7 @@ body{
 
 #auth-btn:hover{
   transition: all 0.2s ease-in-out;
-  background: #BFD7FF;
+  background: var(--background-color);
   color: #010606;
 }
 
@@ -81,7 +81,6 @@ body{
 }
 
 .sale-label{
-  
   color: white;
   grid-row-start: 2;
 }
@@ -103,9 +102,10 @@ body{
 .edit-btn{
   grid-column-start: 2;
   grid-row-start: 2;
-  background-color: #9bb1ff;
+  background-color: var(--nav-bar-color);
+  /* background-color: #9bb1ff; */
   border: none;
-  color: black
+  color: white
 }
 
 .card:hover .edit-btn{
@@ -116,5 +116,83 @@ body{
 
 .edit-btn:hover{
   transition: all 0.2s ease-in-out;
-  background: #BFD7FF;
+  background: var(btn-color);
+}
+
+.card-modal{
+  transition: 0.3s;
+  height: 70%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.container-modal{
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 3%;
+  row-gap: 0;
+  display: grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows: 1fr 4fr 1fr 3fr 1fr;
+  width: 100%;
+  height: 45%;
+}
+
+.label-modal{
+  font-size: 12px;
+}
+.description-label-modal{
+  grid-row-end: 2;
+  margin: 0;
+  padding: 0;
+  height: 10%;
+}
+
+.description-modal{
+  word-wrap: break-word;
+  padding: 0;
+  margin: 0;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 5;
+}
+
+.price-label-modal{
+  grid-row-start: 5;
+}
+
+.price-modal{
+  grid-row-start: 6;
+}
+
+
+.sale-label-modal{
+  color: white;
+  grid-row-start: 7;
+}
+
+.hint-modal{
+  padding-top: 0;
+  margin-bottom: 0;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 8;
+  opacity: 50%;
+  font-size: 13px;
+}
+
+#nft-modal{
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.modal-dialog{
+  width: 50;
+  max-width: 50vh;
+}
+.modal-body{
+  height: 70vh;
 }

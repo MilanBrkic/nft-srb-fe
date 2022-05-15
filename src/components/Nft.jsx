@@ -13,7 +13,7 @@ export default class Nft extends React.Component{
     render(){
         return (
         <div className="card grid-item">
-            <NftModal show={this.state.showModal}/>
+            <NftModal show={this.state.showModal} nft={this.state}/>
             <img id='nft' src={`${this.state.googleId}`} alt={`${this.state.name}`} />  
             <div className="container">
                 <h5><b>{this.state.name}</b></h5>
