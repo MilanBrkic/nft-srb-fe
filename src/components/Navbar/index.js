@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, NavLink, Bars, NavMenu } from './NavbarElements';
 import Auth from '../Auth';
 import { getAccessToken } from '../../services/Cookie';
+import NftModal from '../NftModal';
 
 export default class Navbar extends React.Component {
   constructor(props) {
