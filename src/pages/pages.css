@@ -214,3 +214,7 @@ body{
   color: var(--active-page-color);
 }
 
+.about-us-title{
+  margin-top: 2%;
+  margin-left: 50.8%;
+}
