@@ -15,7 +15,9 @@
   --background-color: #d9e7ff;
   --nav-bar-color: #001d52;
   --btn-color: #256ce1;
-  --active-page-color: #99beff
+  --active-page-color: #99beff;
+  --for-sale-color: green;
+  --not-for-sale-color: red;
 }
 
 

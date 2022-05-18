@@ -30,7 +30,7 @@ export default class Navbar extends React.Component {
             <img src={require('../../images/nft-srb-bey-lin.png')} style={{visibility: show ? 'visible' : 'hidden'}}  width="30%" length="30%" alt="logo" />
           </NavLink>
 
-          <NavMenu>
+          <NavMenu className='nav-menu'>
             {this.state.accessId ? <Link className='navbar-link bold-font' onClick={this.onLinkClik} to="/">nft srb</Link> : null}
             {this.state.accessId ? <Link className='navbar-link bold-font' onClick={this.onLinkClik} to="/buy-nfts">buy nfts</Link> : null}
             {this.state.accessId ? <Link className='navbar-link bold-font' onClick={this.onLinkClik} to="/my-collection">my collection</Link> : null}

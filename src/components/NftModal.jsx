@@ -1,12 +1,14 @@
 import {Button, Modal} from 'react-bootstrap'
 import React from 'react';
+import './css/modal.css'
 
 export default class NftModal extends React.Component {
     constructor(props){
         super(props)
         this.state = {
           show: props.show,
-          nft: props.nft
+          nft: props.nft,
+          changedNft: {...props.nft}
         }
     }
   
@@ -22,6 +24,10 @@ export default class NftModal extends React.Component {
       this.forceUpdate();
     }
 
+    onSaleClick = ()=>{
+      this.state.changedNft.forSale = !this.state.changedNft.forSale;
+      this.forceUpdate();
+    }
     render(){
         return (
             <>
@@ -36,20 +42,22 @@ export default class NftModal extends React.Component {
                     <p className='description-label-modal label-modal'><i>Description:</i></p>
                     <p className='description-modal'>{this.state.nft.description}</p>
                     <p className='price-label-modal label-modal'><i>Price:</i></p>
-                            <p className='price-modal'>{this.state.nft.price} ETH</p>
-                            <div className={`sale-label-modal ${this.state.nft.forSale ? 'for-sale-label' : 'not-for-sale-label'}`}>
-                                {this.state.nft.forSale ? "For Sale" : "Not For Sale"}
+                          <input className='price-modal' value={`${this.state.changedNft.price}`} type='text'/>
+                            <p className='eth-modal'>ETH</p>
+                            <div onClick={this.onSaleClick}
+                                className={`sale-label-modal ${this.state.changedNft.forSale ? 'for-sale-label' : 'not-for-sale-label-modal'}`}>
+                                {this.state.changedNft.forSale ? "For Sale" : "Not For Sale"}
                             </div>
                             <p className='hint-modal'>Hint: toggle "For Sale" button to change the status</p>
                     </div>                  
                     </div>      
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={this.handleClose}>
+                  <Button className='close-btn bold-font' onClick={this.handleClose}>
                     Close
                   </Button>
-                  <Button variant="primary" onClick={this.handleClose}>
-                    Save Changes
+                  <Button className='save-btn bold-font' onClick={this.handleClose}>
+                    Save
                   </Button>
                 </Modal.Footer>
               </Modal>
