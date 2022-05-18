@@ -17,6 +17,7 @@ export default class NftModal extends React.Component {
     }
     handleClose = () => {
       this.state.show = false
+      this.state.changedNft = {...this.state.nft};
       this.forceUpdate();
     }
     handleShow = () => {
@@ -28,6 +29,35 @@ export default class NftModal extends React.Component {
       this.state.changedNft.forSale = !this.state.changedNft.forSale;
       this.forceUpdate();
     }
+
+    handleSave = ()=>{
+      this.areInputsValid();
+      const price = Number(this.state.changedNft.price);
+      const forSale = this.state.changedNft.forSale;
+
+      
+    }
+
+    areInputsValid = ()=>{
+      if(this.state.changedNft.forSale===this.state.nft.forSale && this.state.changedNft.price===this.state.nft.price){
+        alert("You did not change any value");
+        return false;
+      }
+
+      if(isNaN(this.state.changedNft.price)){
+        alert("You did not enter a number for price")
+        return false;
+      }
+
+      const price = Number(this.state.changedNft.price);
+
+      if(price>50000 || price<0.001){
+        alert("Please enter a price between 0.001 ETH and 50000ETH");
+        return false;
+      }
+      return true;
+    }
+    
     render(){
         return (
             <>
@@ -42,7 +72,10 @@ export default class NftModal extends React.Component {
                     <p className='description-label-modal label-modal'><i>Description:</i></p>
                     <p className='description-modal'>{this.state.nft.description}</p>
                     <p className='price-label-modal label-modal'><i>Price:</i></p>
-                          <input className='price-modal' value={`${this.state.changedNft.price}`} type='text'/>
+                          <input className='price-modal' defaultValue={`${this.state.changedNft.price}`} type='text' 
+                          onChange={(event)=>{
+                            this.state.changedNft.price = event.target.value;
+                          }}/>
                             <p className='eth-modal'>ETH</p>
                             <div onClick={this.onSaleClick}
                                 className={`sale-label-modal ${this.state.changedNft.forSale ? 'for-sale-label' : 'not-for-sale-label-modal'}`}>
@@ -56,7 +89,7 @@ export default class NftModal extends React.Component {
                   <Button className='close-btn bold-font' onClick={this.handleClose}>
                     Close
                   </Button>
-                  <Button className='save-btn bold-font' onClick={this.handleClose}>
+                  <Button className='save-btn bold-font' onClick={this.handleSave}>
                     Save
                   </Button>
                 </Modal.Footer>
