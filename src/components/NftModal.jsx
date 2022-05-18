@@ -1,6 +1,5 @@
 import {Button, Modal} from 'react-bootstrap'
 import React from 'react';
-import Nft from './Nft';
 
 export default class NftModal extends React.Component {
     constructor(props){
@@ -28,7 +27,7 @@ export default class NftModal extends React.Component {
             <>
               <Modal show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                <h1><b>{this.state.nft.name}</b></h1>
+                <h1 className='bold-font'>{this.state.nft.name}</h1>
                 </Modal.Header>
                 <Modal.Body>
                   <div className="card-modal">

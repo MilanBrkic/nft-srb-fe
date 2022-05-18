@@ -16,7 +16,7 @@ export default class Nft extends React.Component{
             <NftModal show={this.state.showModal} nft={this.state}/>
             <img id='nft' src={`${this.state.googleId}`} alt={`${this.state.name}`} />  
             <div className="container">
-                <h5><b>{this.state.name}</b></h5>
+                <h5 className='bold-font'>{this.state.name}</h5>
                 <div className='sale-and-edit-div'>
                     <p className='price'>{this.state.price} ETH</p>
                     <div className={`sale-label ${this.state.forSale ? 'for-sale-label' : 'not-for-sale-label'}`}>

@@ -1,5 +1,15 @@
 @import url('http://fonts.cdnfonts.com/css/century-gothic?styles=24895,24896');
 
+
+@font-face {
+  font-family: 'Century Gothic Bold';
+  src: url('./fonts/GOTHICB.TTF');
+}
+
+.bold-font{
+  font-family: 'Century Gothic Bold';
+}
+
 :root{
   /* --background-color: #BFD7FF; */
   --background-color: #d9e7ff;

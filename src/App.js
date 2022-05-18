@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NftSrb from './pages';

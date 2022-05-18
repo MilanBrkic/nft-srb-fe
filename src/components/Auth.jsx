@@ -33,7 +33,7 @@ class Auth extends React.Component {
       <div>
         {
           getAddress() ?
-          <button id="auth-btn" onClick={this.handleOnDisconnect}>disconnect</button>
+          <button id="auth-btn" className='bold-font' onClick={this.handleOnDisconnect}>disconnect</button>
            :
           <div>
             <button id="auth-btn" onClick={this.handleOnConnect}>connect</button> 
