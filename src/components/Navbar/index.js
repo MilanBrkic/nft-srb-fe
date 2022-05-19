@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, NavLink, Bars, NavMenu } from './NavbarElements';
+import { Nav, NavLink, NavMenu } from './NavbarElements';
 import Auth from '../Auth';
 import { getAccessToken } from '../../services/Cookie';
 import { Link } from 'react-router-dom';

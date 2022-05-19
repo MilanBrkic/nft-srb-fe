@@ -1,6 +1,6 @@
 import Constants from '../constants/Constants';
 import { Contract, ethers } from 'ethers';
-import nftSrbJson from '../nft-smart-contract/artifacts/contracts/NftSrb.sol/NftSrb.json';
+import nftSrbJson from '../abi/NftSrb.json';
 
 export async function requestAccounts() {
   const chainId = await getChainId();
