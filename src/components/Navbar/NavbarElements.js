@@ -24,12 +24,10 @@ export const NavLink = styled(Link)`
     color: #99beff;
   }
 
-  &.hover{
+  &.hover {
     color: #85b1ff;
   }
 `;
-
-
 
 export const NavMenu = styled.div`
   display: flex;
