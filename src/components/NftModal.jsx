@@ -31,7 +31,9 @@ export default class NftModal extends React.Component {
     }
 
     handleSave = ()=>{
-      this.areInputsValid();
+      const proceed = this.areInputsValid();
+      if(!proceed) return;
+      
       const price = Number(this.state.changedNft.price);
       const forSale = this.state.changedNft.forSale;
 
