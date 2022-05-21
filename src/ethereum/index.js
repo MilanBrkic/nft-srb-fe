@@ -1,6 +1,7 @@
 import Constants from '../constants/Constants';
 import { Contract, ethers } from 'ethers';
 import nftSrbJson from '../abi/NftSrb.json';
+import { parseEther } from 'ethers/lib/utils';
 
 export async function requestAccounts() {
   const chainId = await getChainId();
@@ -35,6 +36,6 @@ export async function update(tokenId, forSale, price){
 
   const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
 
-  await contract.update(tokenId, forSale, price);
+  await contract.update(tokenId, forSale, parseEther(''+price));
   console.log(`NFT with tokenId: ${tokenId} updated`);
 }

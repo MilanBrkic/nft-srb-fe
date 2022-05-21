@@ -1,6 +1,7 @@
 import {Button, Modal} from 'react-bootstrap'
 import React from 'react';
 import './css/modal.css'
+import {update} from '../ethereum'
 
 export default class NftModal extends React.Component {
     constructor(props){
@@ -30,14 +31,22 @@ export default class NftModal extends React.Component {
       this.forceUpdate();
     }
 
-    handleSave = ()=>{
+    handleSave = async ()=>{
       const proceed = this.areInputsValid();
       if(!proceed) return;
-      
-      const price = Number(this.state.changedNft.price);
-      const forSale = this.state.changedNft.forSale;
 
+      const price = this.state.changedNft.price;
+      const forSale = this.state.changedNft.forSale;
+      const tokenId = this.state.changedNft.tokenId;
       
+      try {
+        await update(tokenId, forSale, price)
+      } catch (error) {
+        console.error(error);        
+      }
+
+      this.props.onUpdate(forSale, Number(price));
+      this.handleClose();
     }
 
     areInputsValid = ()=>{

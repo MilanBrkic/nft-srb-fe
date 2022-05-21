@@ -77,7 +77,7 @@ export default class MintComponent extends Component {
     console.log('Nft stored to ipfs');
 
     try {
-      await mint(nftstorageResponse.url, parseEther(price))
+      await mint(nftstorageResponse.url, parseEther(price)._hex);
       await this.notifyOfMintCompletion(image, nftstorageResponse, Number(price));
       alert(`Nft ${name} minted`);
     } catch (error) {

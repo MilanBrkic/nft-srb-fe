@@ -10,10 +10,15 @@ export default class Nft extends React.Component{
         this.forceUpdate();
     }
 
+    onUpdate = (forSale, price)=>{
+        this.state.forSale = forSale;
+        this.state.price = price;
+        this.forceUpdate();
+    }
     render(){
         return (
         <div className="card grid-item">
-            <NftModal show={this.state.showModal} nft={this.state}/>
+            <NftModal show={this.state.showModal} nft={this.state} onUpdate={this.onUpdate}/>
             <img id='nft' src={`${this.state.googleId}`} alt={`${this.state.name}`} />  
             <div className="container">
                 <h5 className='bold-font'>{this.state.name}</h5>
