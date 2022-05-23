@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import Nft from './Nft';
+import _ from "lodash";
 
 
 export default class GetAllNfts extends Component {
@@ -14,6 +15,11 @@ export default class GetAllNfts extends Component {
 
   componentDidMount(){
     this.getMyCollection();
+  }
+
+  onSortChange= (sort,desc) =>{
+    this.state.nfts =  _.orderBy(this.state.nfts, [sort], [desc ? 'desc' : 'asc'])
+    this.forceUpdate();
   }
 
   getMyCollection = async () => {
