@@ -12,9 +12,6 @@ export default class MintComponent extends Component {
     this.fileInput = React.createRef();
     this.state = {
       image: {},
-      price: '',
-      name: '',
-      description: ''
     };
   }
 
@@ -118,8 +115,12 @@ export default class MintComponent extends Component {
 
   resetFileState() {
     this.fileInput.current.value = null;
-    this.state = {image:{}, name: "", description:"", price:""}
-    console.log(this.state);
+    this.inputDescription.value = '';
+    this.inputName.value = '';
+    this.inputPrice.value = '';
+    this.state.name = '';
+    this.state.price = '';
+    this.state.description = '';
     this.forceUpdate();
   }
 
@@ -128,19 +129,18 @@ export default class MintComponent extends Component {
       <div className="container-mint">
           <h3 className='bold-font mint-header'> Mint </h3>
             <input type="file" className="mint-file" onChange={this.onFileChange} ref={this.fileInput} />
-            
           <label htmlFor="nft-name">Name</label>
-          <input type="text" name=""  id="nft-name" onChange={(event)=>{
+          <input type="text" name="" ref={el=>this.inputName = el} id="nft-name" onChange={(event)=>{
             this.state.name = event.target.value;
           }}/>
 
           <label htmlFor="nft-price">Price in ETH</label>
-          <input type="text" name="" id="nft-price" onChange={(event)=>{
+          <input type="text" name="" ref={el=>this.inputPrice = el} id="nft-price" onChange={(event)=>{
             this.state.price = event.target.value;
           }}/>
 
           <label htmlFor="nft-description">Description</label>
-          <textarea name="" id="nft-description" cols="30" rows="3"
+          <textarea name="" ref={el=>this.inputDescription = el} id="nft-description" cols="30" rows="3"
           
           onChange={(event)=>{
             this.state.description = event.target.value;
