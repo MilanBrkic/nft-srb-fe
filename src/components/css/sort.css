@@ -1,6 +1,6 @@
 /* Dropdown Button */
 .dropbtn {
-    background-color: var(--btn-color);
+    background-color: var(--nav-bar-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -41,8 +41,6 @@
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {
-      background-color: var(--nav-bar-color);
-      color: white;
       transition: all 0.2s ease-in-out;
 
     }

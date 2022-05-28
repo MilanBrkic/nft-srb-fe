@@ -1,0 +1,46 @@
+.container-mint{
+    margin-top: 60%;
+    display: inline-grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 1fr;
+    
+}
+
+.mint-header{
+    display: flex;
+    justify-content: center;
+}
+
+.mint-btn{
+    background-color: var(--nav-bar-color);
+    color: white;
+    border: none;
+    width: 30%;
+}
+
+.mint-btn:hover{
+    background-color: var(--backgroud-color);
+    color: black;
+    transition: all 0.2s;
+}
+
+input[type=file]::-webkit-file-upload-button{
+    background-color: var(--nav-bar-color);
+    color: white;
+    cursor: pointer;
+    border: none
+}
+
+input[type=file]::-webkit-file-upload-button:hover{
+    background-color: var(--backgroud-color);
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mint-btn-div{
+    margin-top: 2%;
+    display: flex;
+    justify-content: flex-end;
+}
+

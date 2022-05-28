@@ -4,7 +4,7 @@ import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 import { checkAspectRatio, checkIfFileIsAnImage } from '../helper';
 import { parseEther } from 'ethers/lib/utils';
-
+import './css/mint.css'
 export default class MintComponent extends Component {
   constructor(props) {
     super(props);
@@ -125,34 +125,32 @@ export default class MintComponent extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <h3> Mint </h3>
-          <div className="form-group">
-            <input type="file" onChange={this.onFileChange} ref={this.fileInput} />
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" onClick={this.handleClick}>
+      <div className="container-mint">
+          <h3 className='bold-font mint-header'> Mint </h3>
+            <input type="file" className="mint-file" onChange={this.onFileChange} ref={this.fileInput} />
+            
+          <label htmlFor="nft-name">Name</label>
+          <input type="text" name=""  id="nft-name" onChange={(event)=>{
+            this.state.name = event.target.value;
+          }}/>
+
+          <label htmlFor="nft-price">Price in ETH</label>
+          <input type="text" name="" id="nft-price" onChange={(event)=>{
+            this.state.price = event.target.value;
+          }}/>
+
+          <label htmlFor="nft-description">Description</label>
+          <textarea name="" id="nft-description" cols="30" rows="3"
+          
+          onChange={(event)=>{
+            this.state.description = event.target.value;
+          }}/>
+          <div className='mint-btn-div'>
+            <button className="mint-btn" onClick={this.handleClick}>
               Mint
             </button>
-
-            <label htmlFor="nft-description">Description</label>
-            <textarea name="" id="nft-description" cols="30" rows="3"
-            onChange={(event)=>{
-              this.state.description = event.target.value;
-            }}/>
-
-            <label htmlFor="nft-name">Name</label>
-            <input type="text" name=""  id="nft-name" onChange={(event)=>{
-              this.state.name = event.target.value;
-            }}/>
-
-            <label htmlFor="nft-price">Price in ETH</label>
-            <input type="text" name="" id="nft-price" onChange={(event)=>{
-              this.state.price = event.target.value;
-            }}/>
           </div>
-        </div>
+          
       </div>
     );
   }
