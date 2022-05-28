@@ -4,8 +4,9 @@ import backendHttpClient from '../http-client/BackendHttpClient';
 import { store } from '../services/NFTStorage';
 import { checkAspectRatio, checkIfFileIsAnImage } from '../helper';
 import { parseEther } from 'ethers/lib/utils';
+import { withAlert } from 'react-alert'
 import './css/mint.css'
-export default class MintComponent extends Component {
+class MintComponent extends Component {
   constructor(props) {
     super(props);
     this.onFileChange = this.onFileChange.bind(this);
@@ -18,7 +19,6 @@ export default class MintComponent extends Component {
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
   }
-
   
 
   handleClick = async () => {
@@ -33,11 +33,11 @@ export default class MintComponent extends Component {
         this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
           console.log(`Failed while minting | Reason: ${error.message}`);
         });
-        alert('Minting should take a few moments. Please wait...');
+        this.props.alert.info('Minting should take a few moments. Please wait...');
       }
     } catch (error) {
       console.error(`Error: ${error.message}`);
-      alert(`Error: ${error.message}`)
+      this.props.alert.error(`${error.message}`)
     }
   };
 
@@ -59,10 +59,10 @@ export default class MintComponent extends Component {
       return true;
     } catch (error) {
       if (error.response) {
-        alert(`Error minting image: ${error.response.data}`);
+        this.props.alert.error(`Error minting image: ${error.response.data}`);
       } else {
         console.log(error);
-        alert(`Error minting image: ${error}`);
+        this.props.alert.error(`Error minting image: ${error}`);
       }
       return false;
     }
@@ -76,10 +76,10 @@ export default class MintComponent extends Component {
     try {
       await mint(nftstorageResponse.url, parseEther(price)._hex);
       await this.notifyOfMintCompletion(image, nftstorageResponse, Number(price));
-      alert(`Nft ${name} minted`);
+      this.props.alert.info(`Nft ${name} minted`);
     } catch (error) {
       console.error(`Minting failed: ${error.message}`);
-      alert("Minting failed")
+      this.props.alert.error("Minting failed")
       await this.unlockNft(image);
     }
   };
@@ -104,10 +104,10 @@ export default class MintComponent extends Component {
       await backendHttpClient.post('/nft/unlock', formData);
     } catch (error) {
       if (error.response) {
-        alert(`Error sending unlock request: ${error.response.data}`);
+        this.props.alert.error(`Error sending unlock request: ${error.response.data}`);
       } else {
         console.log(error);
-        alert(`Error sending unlock request: ${error}`);
+        this.props.alert.error(`Error sending unlock request: ${error}`);
       }
     }
   }
@@ -155,3 +155,5 @@ export default class MintComponent extends Component {
     );
   }
 }
+
+export default withAlert()(MintComponent)

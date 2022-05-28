@@ -2,8 +2,9 @@ import {Button, Modal} from 'react-bootstrap'
 import React from 'react';
 import './css/modal.css'
 import {update} from '../ethereum'
+import {withAlert} from 'react-alert'
 
-export default class NftModal extends React.Component {
+class NftModal extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -51,19 +52,19 @@ export default class NftModal extends React.Component {
 
     areInputsValid = ()=>{
       if(this.state.changedNft.forSale===this.state.nft.forSale && this.state.changedNft.price===this.state.nft.price){
-        alert("You did not change any value");
+        this.props.alert.error("You did not change any value");
         return false;
       }
 
       if(isNaN(this.state.changedNft.price)){
-        alert("You did not enter a number for price")
+        this.props.alert.error("You did not enter a number for price")
         return false;
       }
 
       const price = Number(this.state.changedNft.price);
 
       if(price>50000 || price<0.001){
-        alert("Please enter a price between 0.001 ETH and 50000ETH");
+        this.props.alert.error("Please enter a price between 0.001 ETH and 50000ETH");
         return false;
       }
       return true;
@@ -109,3 +110,5 @@ export default class NftModal extends React.Component {
           );
     }
   }
+
+  export default withAlert()(NftModal)

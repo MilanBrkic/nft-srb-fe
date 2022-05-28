@@ -7,7 +7,7 @@ import MintNfts from './pages/mint-nfts';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default class App extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     if (typeof window.ethereum !== 'undefined') {
       console.log('Web3 installed!');
@@ -15,6 +15,7 @@ export default class App extends React.Component {
       alert('Web3 is not installed, please install to use the app');
     }
   }
+
 
   render() {
     return (
@@ -32,3 +33,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;
