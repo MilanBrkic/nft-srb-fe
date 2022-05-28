@@ -1,5 +1,4 @@
 import React from 'react';
-import { OrderDir, SortBy } from '../types/types';
 import './css/sort.css'
 export default class SortComponent extends React.Component {
     constructor(props){
@@ -22,12 +21,25 @@ export default class SortComponent extends React.Component {
         this.props.onChange(this.state.sort,this.state.desc);
     }
 
+    mapSort = (sort)=>{
+        switch (sort) {
+            case "name":
+                return "Name"
+            case "price":
+                return "Price"
+            case "forSale":
+                return "Sale";
+            default:
+                return "None";
+        }
+    }
+
     render(){
         return (
             <div className="sortDiv">
                 <p className='sort-p'>Sort: </p> 
                     <div className="dropdown">
-                        <button className="dropbtn bold-font">{this.state.sort}</button>
+                        <button className="dropbtn">{this.mapSort(this.state.sort)}</button>
                         <div className="dropdown-content">
                             <p onClick={()=>{this.onSortChange("name")}}>Name</p>
                             <p onClick={()=>{this.onSortChange("price")}}>Price</p>
