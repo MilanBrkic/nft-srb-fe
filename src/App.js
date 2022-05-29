@@ -6,13 +6,13 @@ import MyCollection from './pages/my-collection';
 import MintNfts from './pages/mint-nfts';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { withAlert } from 'react-alert';
 class App extends React.Component {
   componentDidMount() {
     if (typeof window.ethereum !== 'undefined') {
       console.log('Web3 installed!');
     } else {
-      alert('Web3 is not installed, please install to use the app');
+      this.props.alert.error('Web3 is not installed, please install to use the app');
     }
   }
 
@@ -34,4 +34,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAlert()(App);

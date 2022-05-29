@@ -34,7 +34,11 @@ class NftModal extends React.Component {
 
     handleSave = async ()=>{
       const proceed = this.areInputsValid();
-      if(!proceed) return;
+      if(!proceed) {
+        this.state.show = false
+        this.forceUpdate()
+        return
+      };
 
       const price = this.state.changedNft.price;
       const forSale = this.state.changedNft.forSale;

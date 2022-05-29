@@ -13,6 +13,9 @@ class MintComponent extends Component {
     this.fileInput = React.createRef();
     this.state = {
       image: {},
+      name: '',
+      price: '',
+      description: ''
     };
   }
 
@@ -22,12 +25,12 @@ class MintComponent extends Component {
   
 
   handleClick = async () => {
-    const image = this.state.image;
-    try {
-      if(!image.name) throw Error("No image chosen");      
-      checkIfFileIsAnImage(image);
-      await checkAspectRatio(image)
+    const isGood = await this.checkFields();
+    if(!isGood) return;
 
+    try {
+      const image = this.state.image;
+  
       const shouldMint = await this.checkIfMinted(image);
       if (shouldMint) {
         this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
@@ -41,16 +44,50 @@ class MintComponent extends Component {
     }
   };
 
-  /*
-  checkFields = ()=>{
-    if(this.state.name.length>20) // TODO warn msg
+  
+  checkFields = async()=>{
+    if(!this.state.image.name){
+      this.props.alert.error("No image chosen");
+      return false;
+    }
 
-    if(this.state.price>1000) // TODO warn msg
-    if(this.state.description.length>140) // TODO warn msg
+    if(!checkIfFileIsAnImage(this.state.image)){
+      this.props.alert.error("Must be an image")
+      return false;
+    }
+
+    const isSquare = await checkAspectRatio(this.state.image)
+    if(!isSquare){
+      this.props.alert.error("Must be 1x1 aspect ratio")
+      return false;
+    }
+
+    if(this.state.name.length <2 || this.state.name.length>20){
+      this.props.alert.error("Name must be between 2 and 20 characters")
+      return false;
+    }
+
+    if(isNaN(this.state.price)){
+      this.props.alert.error("You did not enter a number for price")
+      return false;
+    }
+
+    const price = Number(this.state.price);
+
+    if(price>50000 || price<0.001){
+      this.props.alert.error("Please enter a price between 0.001 ETH and 50000ETH");
+      return false;
+    }
+
+
+    if(this.state.description.length <2 || this.state.description.length>100){
+      this.props.alert.error("Description must be between 2 and 100 characters")
+      return false;
+    }
+
+    return true;
   }
-  */
-
-
+  
   checkIfMinted = async (image) => {
     try {
       const formData = new FormData();

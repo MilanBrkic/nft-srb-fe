@@ -12,11 +12,11 @@ export async function checkAspectRatio(file) {
     var objectUrl = _URL.createObjectURL(file);
     img.onload = function () {
       if (Math.abs(this.width - this.height) > 5) {
-        reject(new Error('Image must be 1x1 aspect ration'));
+         resolve(false);
       }
 
       _URL.revokeObjectURL(objectUrl);
-      resolve();
+      resolve(true);
     };
     img.src = objectUrl;
   });
@@ -24,8 +24,9 @@ export async function checkAspectRatio(file) {
 
 export function checkIfFileIsAnImage(image) {
   if (image.type !== 'image/png' && image.type !== 'image/jpg' && image.type !== 'image/jpeg') {
-    throw Error('File is not an image type');
+    return false;
   }
+  return true;
 }
 
 export function trimAddress(address) {

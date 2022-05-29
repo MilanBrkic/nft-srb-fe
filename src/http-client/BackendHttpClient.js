@@ -1,5 +1,4 @@
 import axios from 'axios';
-import App from '../App';
 import Constants from '../constants/Constants';
 import { getAccessToken, removeAllCookies } from '../services/Cookie';
 
@@ -40,7 +39,7 @@ class BackendHttpClient {
 
   checkForUnauthorizedError(error) {
     if (error.response && error.response.status === 401) {
-      App.alert.info('Connection expired, disconnecting');
+      alert('Connection expired, disconnecting');
       removeAllCookies();
       window.location.reload();
     }
