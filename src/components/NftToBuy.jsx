@@ -1,5 +1,5 @@
 import React from 'react'
-import NftModal from './NftModal';
+import NftToBuyModal from './NftToBuyModal';
 import './css/to-buy.css'
 export default class NftToBuy extends React.Component{
     constructor(props){
@@ -19,7 +19,7 @@ export default class NftToBuy extends React.Component{
     render(){
         return (
         <div className="card grid-item">
-            <NftModal show={this.state.showModal} nft={this.state} onUpdate={this.onUpdate}/>
+            <NftToBuyModal show={this.state.showModal} nft={this.state} onUpdate={this.onUpdate}/>
             <img id='nft' src={`${this.state.googleId}`} alt={`${this.state.name}`} />  
             <div className="container">
                 <h5 className='bold-font'>{this.state.name}</h5>

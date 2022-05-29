@@ -1,0 +1,29 @@
+.eth-div{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    align-items: flex-end;
+
+}
+.eth-to-buy-modal{
+    margin-top: 50%;
+    font-size: 6vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.eth{
+    font-size: 2vh;
+}
+
+.container-modal-to-buy{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.description-modal-to-buy{
+    margin-top: 5%;
+}
+.modal-body-to-buy{
+    height: 30% !important;
+}
