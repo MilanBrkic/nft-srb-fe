@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
-import Nft from './Nft';
+import NftToBuy from './NftToBuy';
 import { withAlert } from 'react-alert';
 import _ from "lodash";
 
@@ -36,7 +36,7 @@ class GetNftsToBuy extends Component {
 
   render() {
     const arrList = this.state.nfts.map((nft) => {
-      return <Nft key={nft.md5Hash} nft={nft}/>;
+      return <NftToBuy key={nft.md5Hash} nft={nft}/>;
     });
     return (
       <div className='grid-container'>

@@ -108,16 +108,16 @@ body{
   color: white
 }
 
-.card:hover .edit-btn{
-  transition: all 0.2s ease-in-out;
-  transform: scale(1.2);
-
-}
-
 .edit-btn:hover{
   transition: all 0.2s ease-in-out;
   background-color: var(--background-color);
   color: black;
+}
+
+.card:hover .edit-btn{
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.2);
+
 }
 
 

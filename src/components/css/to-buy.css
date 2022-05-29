@@ -1,0 +1,31 @@
+.sale-and-edit-div{
+    display: inline-grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+  }
+  .buy-btn{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    background-color: var(--not-for-sale-color);
+    /* background-color: #9bb1ff; */
+    border: none;
+    color: white;
+    height: 65%;
+    margin-top: 10%
+  }
+  
+  .buy-btn:hover{
+    transition: all 0.2s ease-in-out;
+    background-color: var(--background-color);
+    color: black;
+  }
+  
+  .card:hover .buy-btn{
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.2);
+  }
+
+  .price-buy{
+      font-size: 2.5vh;
+  }
