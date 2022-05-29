@@ -7,6 +7,9 @@ import './pages.css';
 export default class MyCollection extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      show: false
+    }
     this.child = React.createRef();
   }
   onSortChange = (sort, desc) =>{
@@ -15,12 +18,20 @@ export default class MyCollection extends React.Component {
     this.child.current.onSortChange(sort,desc);
 
   }
+
+  getNftNum = (num) =>{
+    if(num === 0){
+      this.state.show = false
+    }
+    else this.state.show = true;
+    this.forceUpdate()
+  }
   render() {
     const returnable =  (
       <div className="main-div">
         <h1 className="my-collection-h1 bold-font">my collection</h1>
-        <SortComponent onChange={this.onSortChange}/>
-        <GetAllNfts ref={this.child}/>
+        {this.state.show ? <SortComponent onChange={this.onSortChange}/> : null}
+        <GetAllNfts ref={this.child} getNftNum={this.getNftNum}/>
       </div>
     );
       //↓ ↑ 🢃 🢁 🠉 🠋 🠕

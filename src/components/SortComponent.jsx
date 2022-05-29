@@ -5,7 +5,8 @@ export default class SortComponent extends React.Component {
         super(props);
         this.state = {
             sort: "None",
-            order: true
+            order: true,
+            hideSale: this.props.hideSale ? true : false,
         }
     }
 
@@ -43,7 +44,8 @@ export default class SortComponent extends React.Component {
                         <div className="dropdown-content">
                             <p onClick={()=>{this.onSortChange("name")}}>Name</p>
                             <p onClick={()=>{this.onSortChange("price")}}>Price</p>
-                            <p onClick={()=>{this.onSortChange("forSale")}}>Sale</p>
+                            {this.state.hideSale ? null: <p onClick={()=>{this.onSortChange("forSale")}}>Sale</p>}
+                           
                         </div>
                     </div>
                     <p className='sort-p'>Order: </p> 

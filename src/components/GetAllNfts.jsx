@@ -2,9 +2,9 @@ import { Component } from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
 import Nft from './Nft';
 import _ from "lodash";
+import { withAlert } from 'react-alert';
 
-
-export default class GetAllNfts extends Component {
+ class GetAllNfts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +27,11 @@ export default class GetAllNfts extends Component {
     try {
       const nfts = await backendHttpClient.get(url);
       this.state.nfts = nfts;
+      this.props.getNftNum(this.state.nfts.length);
       this.forceUpdate();
     } catch (error) {
       console.log(`Error in getting nfts | Reason: ${error.message}`);
+      this.props.alert.error("Error in getting nfts")
     }
   };
 
@@ -44,5 +46,5 @@ export default class GetAllNfts extends Component {
     );
   }
 }
-
+export default withAlert()(GetAllNfts)
 // https://drive.google.com/uc?id=1g3VkpDLF6ohbNYX_-9NiYz_P8hpJbaPM
