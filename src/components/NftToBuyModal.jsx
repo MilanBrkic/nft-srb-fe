@@ -3,6 +3,7 @@ import React from 'react';
 import './css/modal.css';
 import { withAlert } from 'react-alert';
 import './css/to-buy-modal.css'
+import {buy} from '../ethereum'
 class NftToBuyModal extends React.Component {
   constructor(props){
     super(props)
@@ -21,18 +22,15 @@ handleClose = () => {
   this.state.changedNft = {...this.state.nft};
   this.forceUpdate();
 }
-handleShow = () => {
-  this.state.show = true
-  this.forceUpdate();
-}
-
-onSaleClick = ()=>{
-  this.state.changedNft.forSale = !this.state.changedNft.forSale;
-  this.forceUpdate();
-}
 
 handleBuy = async ()=>{
-
+  try {
+    await buy(this.state.nft.tokenId, this.state.nft.price);
+  } catch (error) {
+    console.log(`Error while buying nft | Reason: ${error.message}`);
+    this.props.alert.error("Error while buying nft")
+  }
+  this.props.buyHappened(this.state.nft.tokenId);
   this.handleClose();
 }
 
@@ -53,9 +51,7 @@ render(){
                   </div>
                   <div className='eth-div'>
                     <p className='eth-to-buy-modal bold-font'>{this.state.nft.price} <p className='eth'>ETH</p> </p>
-  
                   </div>
-                  
                 </div>                  
               </div>      
             </Modal.Body>

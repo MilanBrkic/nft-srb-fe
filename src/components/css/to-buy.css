@@ -7,7 +7,7 @@
   .buy-btn{
     grid-column-start: 2;
     grid-row-start: 1;
-    background-color: var(--not-for-sale-color);
+    background-color: var(--nav-bar-color);
     /* background-color: #9bb1ff; */
     border: none;
     color: white;

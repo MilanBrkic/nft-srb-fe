@@ -34,9 +34,14 @@ class GetNftsToBuy extends Component {
     }
   };
 
+  removeNft =(tokenId)=>{
+    this.state.nfts = this.state.nfts.filter(nft=>nft.tokenId!==tokenId)
+    this.forceUpdate();
+  }
+
   render() {
     const arrList = this.state.nfts.map((nft) => {
-      return <NftToBuy key={nft.md5Hash} nft={nft}/>;
+      return <NftToBuy removeNft={this.removeNft} key={nft.md5Hash} nft={nft}/>;
     });
     return (
       <div className='grid-container'>
