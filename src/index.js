@@ -28,7 +28,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-window.ethereum.on('accountsChanged', function (changedAddress) {
+window.ethereum?.on('accountsChanged', function (changedAddress) {
   const previousAddress = getAddress();
   if (previousAddress) {
     if (changedAddress !== previousAddress) {
@@ -39,7 +39,7 @@ window.ethereum.on('accountsChanged', function (changedAddress) {
   }
 });
 
-window.ethereum.on('chainChanged', async () => {
+window.ethereum?.on('chainChanged', async () => {
   const chainId = await getChainId();
   if(parseInt(chainId, 16) !== Constants.EXPECTED_CHAIN_ID){
     alert("Chain changed, we'll need to disconnect you, please reconnect again");

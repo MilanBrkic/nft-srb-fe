@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withAlert } from 'react-alert';
 class App extends React.Component {
   componentDidMount() {
-    if (typeof window.ethereum !== 'undefined') {
+    if (window.ethereum) {
       console.log('Web3 installed!');
     } else {
       this.props.alert.error('Web3 is not installed, please install to use the app');

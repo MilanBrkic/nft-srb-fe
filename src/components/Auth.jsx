@@ -4,9 +4,10 @@ import { requestAccounts, checkForChain } from '../ethereum';
 import {  getAddress, setAccessToken, setAddress, removeAllCookies } from '../services/Cookie';
 import { Redirect } from 'react-router-dom';
 import {trimAddress} from '../helper'
+import {withAlert} from 'react-alert'
 class Auth extends React.Component {
   handleOnConnect = async () => {    
-    const proceed = await checkForChain();
+    const proceed = await checkForChain(this.props.alert);
     if(!proceed){
       return;
     }
@@ -53,4 +54,4 @@ class Auth extends React.Component {
     )
   }
 }
-export default Auth;
+export default withAlert()(Auth);
