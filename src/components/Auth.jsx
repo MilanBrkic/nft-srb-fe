@@ -3,6 +3,7 @@ import backendHttpClient from '../http-client/BackendHttpClient';
 import { requestAccounts } from '../ethereum';
 import {  getAddress, setAccessToken, setAddress, removeAllCookies } from '../services/Cookie';
 import { Redirect } from 'react-router-dom';
+import {trimAddress} from '../helper'
 class Auth extends React.Component {
   handleOnConnect = async () => {
     const url = '/auth';
@@ -33,10 +34,13 @@ class Auth extends React.Component {
       <div>
         {
           getAddress() ?
-          <button id="auth-btn" className='bold-font' onClick={this.handleOnDisconnect}>disconnect</button>
+          <div className='when-connected-div'>
+            <button className='bold-font auth-btn' onClick={this.handleOnDisconnect}>disconnect</button>
+            <button className=' bold-font wallet-btn'>{trimAddress(getAddress())}</button>
+          </div>
            :
           <div>
-            <button id="auth-btn" onClick={this.handleOnConnect}>connect</button> 
+            <button className="bold-font auth-btn" onClick={this.handleOnConnect}>connect</button> 
             <Redirect to="/"/>
           </div>
         }

@@ -8,7 +8,7 @@ body{
   margin-bottom: 3%;
 }
 
-#auth-btn{
+.auth-btn{
   border-radius: 4px;
   background: var(--btn-color);
   padding: 10px 22px;
@@ -21,10 +21,25 @@ body{
   margin-left: 24px;
 }
 
-#auth-btn:hover{
+.auth-btn:hover{
   transition: all 0.2s ease-in-out;
   background: var(--background-color);
   color: #010606;
+}
+
+.wallet-btn{
+  border-radius: 4px;
+  background: var(--background-color);
+  padding: 5px 5%;
+  color: var(--nav-bar-color);
+  font-size: 80%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  margin-left: 24px;
+  pointer-events: none;
 }
 
 .my-collection-h1{
@@ -161,4 +176,8 @@ body{
   margin: 0;
   margin-right: 1%;
   margin-left: 1%
+}
+
+.when-connected-div{
+  display: flex;
 }

@@ -30,7 +30,7 @@ export function checkIfFileIsAnImage(image) {
 }
 
 export function trimAddress(address) {
-  return address.slice(0, 5) + '...' + address.slice(address.length - 3, address.length);
+  return address.slice(0, 5) + '...' + address.slice(address.length - 5, address.length);
 }
 
 export function redirectToHomePageIfNeeded(toReturn) {

@@ -30,8 +30,8 @@ export default class Navbar extends React.Component {
             <img
               src={require('../../images/nft-srb-bey-lin.png')}
               style={{ visibility: show ? 'visible' : 'hidden' }}
-              width="30%"
-              length="30%"
+              width="60%"
+              length="60%"
               alt="logo"
             />
           </NavLink>
