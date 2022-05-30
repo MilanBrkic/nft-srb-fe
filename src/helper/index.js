@@ -12,7 +12,7 @@ export async function checkAspectRatio(file) {
     var objectUrl = _URL.createObjectURL(file);
     img.onload = function () {
       if (Math.abs(this.width - this.height) > 5) {
-         resolve(false);
+        resolve(false);
       }
 
       _URL.revokeObjectURL(objectUrl);

@@ -40,11 +40,11 @@ export async function update(tokenId, forSale, price) {
   console.log(`NFT with tokenId: ${tokenId} updated`);
 }
 
-export async function buy(tokenId, price){
+export async function buy(tokenId, price) {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
   const contract = new Contract(Constants.CONTRACT_ADDRESS, nftSrbJson.abi, signer);
 
-  await contract.buy(tokenId, {value: parseEther(price+"")});
+  await contract.buy(tokenId, { value: parseEther(price + '') });
 }
