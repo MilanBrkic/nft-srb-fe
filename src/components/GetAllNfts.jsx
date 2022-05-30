@@ -3,7 +3,7 @@ import backendHttpClient from '../http-client/BackendHttpClient';
 import Nft from './Nft';
 import _ from "lodash";
 import { withAlert } from 'react-alert';
-
+import {isEdited} from '../services/Cookie'
  class GetAllNfts extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +37,11 @@ import { withAlert } from 'react-alert';
 
   render() {
     const arrList = this.state.nfts.map((nft) => {
+      const edited = isEdited(nft.tokenId);
+      if(edited){
+        nft.price = edited.price;
+        nft.forSale = edited.forSale;
+      }
       return <Nft key={nft.md5Hash} nft={nft}/>;
     });
     return (

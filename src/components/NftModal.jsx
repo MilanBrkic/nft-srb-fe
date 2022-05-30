@@ -3,6 +3,7 @@ import React from 'react';
 import './css/modal.css'
 import {update} from '../ethereum'
 import {withAlert} from 'react-alert'
+import {addEdited} from '../services/Cookie'
 
 class NftModal extends React.Component {
     constructor(props){
@@ -46,6 +47,7 @@ class NftModal extends React.Component {
       
       try {
         await update(tokenId, forSale, price)
+        addEdited(tokenId, {price, forSale});
       } catch (error) {
         console.error(error);        
       }

@@ -26,6 +26,7 @@ handleClose = () => {
 handleBuy = async ()=>{
   try {
     await buy(this.state.nft.tokenId, this.state.nft.price);
+    
   } catch (error) {
     console.log(`Error while buying nft | Reason: ${error.message}`);
     this.props.alert.error("Error while buying nft")
