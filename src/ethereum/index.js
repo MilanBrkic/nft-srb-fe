@@ -4,18 +4,62 @@ import nftSrbJson from '../abi/NftSrb.json';
 import { parseEther } from 'ethers/lib/utils';
 
 export async function requestAccounts() {
-  const chainId = await getChainId();
-
-  if (parseInt(chainId, 16) === Constants.EXPECTED_CHAIN_ID) {
-    return window.ethereum.request({
+  try {
+    return await window.ethereum.request({
       method: 'eth_requestAccounts'
-    });
-  } else {
-    alert('Connected to a wrong network');
+    }); 
+  } catch (error) {
+    console.error(error);    
+  }
+}
+export async function checkForChain(alert) {
+  if(window.ethereum){
+    const chainId = await getChainId();
+    if(parseInt(chainId, 16) !== Constants.EXPECTED_CHAIN_ID){
+      try {
+        await switchChain();
+        return true;
+      } catch (error) {
+        if (error.code === 4092) {
+          const result = await addChain()
+          console.log(result);
+          return true;
+        }
+        else{
+          console.error(error.message);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  else{
+    alert.error("You don't have metamask installed")
+    return false;
   }
 }
 
-async function getChainId() {
+async function switchChain(){
+  await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0x3' }] 
+  });
+}
+
+async function addChain(){
+  await window.ethereum.request({
+    method: 'wallet_addEthereumChain',
+    params: [
+      {
+        chainId: '0x3',
+        rpcUrls: ['https://ropsten.infura.io/v3/'],
+        chainName: 'Ropsten Test Network',
+        blockExplorerUrls: ['https://ropsten.etherscan.io']
+      }
+    ]
+  });
+}
+export async function getChainId() {
   return window.ethereum.request({
     method: 'eth_chainId'
   });

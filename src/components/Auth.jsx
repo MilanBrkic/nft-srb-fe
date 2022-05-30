@@ -1,14 +1,19 @@
 import React from 'react';
 import backendHttpClient from '../http-client/BackendHttpClient';
-import { requestAccounts } from '../ethereum';
+import { requestAccounts, checkForChain } from '../ethereum';
 import {  getAddress, setAccessToken, setAddress, removeAllCookies } from '../services/Cookie';
 import { Redirect } from 'react-router-dom';
 import {trimAddress} from '../helper'
 class Auth extends React.Component {
-  handleOnConnect = async () => {
-    const url = '/auth';
+  handleOnConnect = async () => {    
+    const proceed = await checkForChain();
+    if(!proceed){
+      return;
+    }
+
     const accounts = await requestAccounts();
     try {
+      const url = '/auth';
       const response = await backendHttpClient.post(url, { accounts });
       console.log(`Welcome user ${response.address}`);
       this.auth(accounts[0], response.accessId);

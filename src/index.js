@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { getAddress, removeAllCookies } from './services/Cookie';
+import {getChainId} from './ethereum'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import Constants from './constants/Constants';
 
 const options = {
   // you can also just use 'bottom center'
@@ -34,6 +36,15 @@ window.ethereum.on('accountsChanged', function (changedAddress) {
       removeAllCookies();
       window.location.reload();
     }
+  }
+});
+
+window.ethereum.on('chainChanged', async () => {
+  const chainId = await getChainId();
+  if(parseInt(chainId, 16) !== Constants.EXPECTED_CHAIN_ID){
+    alert("Chain changed, we'll need to disconnect you, please reconnect again");
+    removeAllCookies();
+    window.location.reload();
   }
 });
 

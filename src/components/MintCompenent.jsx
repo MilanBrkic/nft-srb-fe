@@ -36,7 +36,7 @@ class MintComponent extends Component {
         this.mint(image, this.state.name.trim(), this.state.description.trim(), this.state.price.trim()).catch((error) => {
           console.log(`Failed while minting | Reason: ${error.message}`);
         });
-        this.props.alert.info('Minting should take a few moments. Please wait...');
+        this.props.alert.info('Minting should take a few moments.');
       }
     } catch (error) {
       console.error(`Error: ${error.message}`);
