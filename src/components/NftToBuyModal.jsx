@@ -4,7 +4,7 @@ import './css/modal.css';
 import { withAlert } from 'react-alert';
 import './css/to-buy-modal.css'
 import {buy} from '../ethereum'
-import {addToBought} from '../ethereum';
+import {addToBought} from '../services/Cookie';
 class NftToBuyModal extends React.Component {
   constructor(props){
     super(props)

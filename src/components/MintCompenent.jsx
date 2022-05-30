@@ -113,7 +113,6 @@ class MintComponent extends Component {
     try {
       await mint(nftstorageResponse.url, parseEther(price)._hex);
       await this.notifyOfMintCompletion(image, nftstorageResponse, Number(price));
-      this.props.alert.info(`Nft ${name} minted`);
     } catch (error) {
       console.error(`Minting failed: ${error.message}`);
       this.props.alert.error("Minting failed")
