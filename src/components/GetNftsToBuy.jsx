@@ -3,6 +3,7 @@ import backendHttpClient from '../http-client/BackendHttpClient';
 import NftToBuy from './NftToBuy';
 import { withAlert } from 'react-alert';
 import _ from "lodash";
+import { getBought } from '../services/Cookie';
 
 
 class GetNftsToBuy extends Component {
@@ -40,7 +41,13 @@ class GetNftsToBuy extends Component {
   }
 
   render() {
-    const arrList = this.state.nfts.map((nft) => {
+    const arrList = this.state.nfts.filter((nft)=>{
+      const bought = getBought()
+      if(bought.has(nft.tokenId)){
+        return false;
+      }
+      else return true;
+    }).map((nft) => {
       return <NftToBuy removeNft={this.removeNft} key={nft.md5Hash} nft={nft}/>;
     });
     return (

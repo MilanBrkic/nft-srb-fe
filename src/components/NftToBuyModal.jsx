@@ -4,6 +4,7 @@ import './css/modal.css';
 import { withAlert } from 'react-alert';
 import './css/to-buy-modal.css'
 import {buy} from '../ethereum'
+import {addToBought} from '../ethereum';
 class NftToBuyModal extends React.Component {
   constructor(props){
     super(props)
@@ -26,7 +27,7 @@ handleClose = () => {
 handleBuy = async ()=>{
   try {
     await buy(this.state.nft.tokenId, this.state.nft.price);
-    
+    addToBought(this.state.nft.tokenId);
   } catch (error) {
     console.log(`Error while buying nft | Reason: ${error.message}`);
     this.props.alert.error("Error while buying nft")
