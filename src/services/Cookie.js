@@ -55,4 +55,5 @@ export function getBought(){
 export function removeAllCookies() {
   cookies.remove(accessIdKey);
   cookies.remove(addressKey);
+  cookies.remove("bought");
 }
