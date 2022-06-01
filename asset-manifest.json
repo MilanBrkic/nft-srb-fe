@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/nft-srb-fe/static/css/main.24772cd2.css",
-    "main.js": "/nft-srb-fe/static/js/main.25cfdc0f.js",
-    "static/js/787.93a87f0a.chunk.js": "/nft-srb-fe/static/js/787.93a87f0a.chunk.js",
-    "static/media/GOTHICB.TTF": "/nft-srb-fe/static/media/GOTHICB.861d22617fdfce5fc922.TTF",
-    "static/media/logo-sive-linhije.png": "/nft-srb-fe/static/media/logo-sive-linhije.0de17fa3eef72c4be160.png",
-    "index.html": "/nft-srb-fe/index.html",
-    "main.24772cd2.css.map": "/nft-srb-fe/static/css/main.24772cd2.css.map",
-    "main.25cfdc0f.js.map": "/nft-srb-fe/static/js/main.25cfdc0f.js.map",
-    "787.93a87f0a.chunk.js.map": "/nft-srb-fe/static/js/787.93a87f0a.chunk.js.map"
+    "main.css": "/static/css/main.0c12e2a6.css",
+    "main.js": "/static/js/main.7e249166.js",
+    "static/js/787.93a87f0a.chunk.js": "/static/js/787.93a87f0a.chunk.js",
+    "static/media/GOTHICB.TTF": "/static/media/GOTHICB.861d22617fdfce5fc922.TTF",
+    "static/media/logo-sive-linhije.png": "/static/media/logo-sive-linhije.0de17fa3eef72c4be160.png",
+    "index.html": "/index.html",
+    "main.0c12e2a6.css.map": "/static/css/main.0c12e2a6.css.map",
+    "main.7e249166.js.map": "/static/js/main.7e249166.js.map",
+    "787.93a87f0a.chunk.js.map": "/static/js/787.93a87f0a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.24772cd2.css",
-    "static/js/main.25cfdc0f.js"
+    "static/css/main.0c12e2a6.css",
+    "static/js/main.7e249166.js"
   ]
 }
