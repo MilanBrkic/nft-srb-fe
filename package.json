@@ -26,7 +26,7 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "http://MilanBrkic.github.io/nft-srb-fe",
+  "homepage": "http://milanbrkic.github.io/nft-srb-fe",
   "scripts": {
     "predeploy":"npm run build",
     "deploy":"gh-pages -d build",
