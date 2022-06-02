@@ -24,8 +24,8 @@ class App extends React.Component {
           <Switch>
             <Route path="/nft-srb-fe" exact component={NftSrb} />
             <Route path="/nft-srb-fe/buy-nfts" component={BuyNfts} />
-            <Route path="/nft-srb-fe//my-collection" component={MyCollection} />
-            <Route path="/nft-srb-fe//mint-nfts" component={MintNfts} />
+            <Route path="/nft-srb-fe/my-collection" component={MyCollection} />
+            <Route path="/nft-srb-fe/mint-nfts" component={MintNfts} />
           </Switch>
         </Router>
       </div>
