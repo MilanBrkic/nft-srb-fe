@@ -5,7 +5,7 @@ import BuyNfts from './pages/buy-nfts';
 import MyCollection from './pages/my-collection';
 import MintNfts from './pages/mint-nfts';
 import Navbar from './components/Navbar';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withAlert } from 'react-alert';
 class App extends React.Component {
   componentDidMount() {

@@ -7,46 +7,44 @@ export async function requestAccounts() {
   try {
     return await window.ethereum.request({
       method: 'eth_requestAccounts'
-    }); 
+    });
   } catch (error) {
-    console.error(error);    
+    console.error(error);
   }
 }
 export async function checkForChain(alert) {
-  if(window.ethereum){
+  if (window.ethereum) {
     const chainId = await getChainId();
-    if(parseInt(chainId, 16) !== Constants.EXPECTED_CHAIN_ID){
+    if (parseInt(chainId, 16) !== Constants.EXPECTED_CHAIN_ID) {
       try {
         await switchChain();
         return true;
       } catch (error) {
         if (error.code === 4092) {
-          const result = await addChain()
+          const result = await addChain();
           console.log(result);
           return true;
-        }
-        else{
+        } else {
           console.error(error.message);
           return false;
         }
       }
     }
     return true;
-  }
-  else{
-    alert.error("You don't have metamask installed")
+  } else {
+    alert.error("You don't have metamask installed");
     return false;
   }
 }
 
-async function switchChain(){
+async function switchChain() {
   await window.ethereum.request({
     method: 'wallet_switchEthereumChain',
-    params: [{ chainId: '0x3' }] 
+    params: [{ chainId: '0x3' }]
   });
 }
 
-async function addChain(){
+async function addChain() {
   await window.ethereum.request({
     method: 'wallet_addEthereumChain',
     params: [

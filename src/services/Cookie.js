@@ -25,35 +25,34 @@ export function setAddress(address) {
   return cookies.set(addressKey, address, { expires: now });
 }
 
-export function addEdited(tokenId, obj){
+export function addEdited(tokenId, obj) {
   const now = new Date();
   now.setMinutes(now.getMinutes + 5);
   cookies.set(tokenId, obj, now);
 }
 
-export function isEdited(tokenId){
+export function isEdited(tokenId) {
   return cookies.get(tokenId);
 }
 
-export function addToBought(tokenId){
+export function addToBought(tokenId) {
   const now = new Date();
   now.setMinutes(now.getMinutes + 5);
-  const bought = cookies.get("bought");
-  if(bought){
+  const bought = cookies.get('bought');
+  if (bought) {
     bought.push(tokenId);
-    cookies.set("bought", bought, {expires: now});
-  }
-  else{
+    cookies.set('bought', bought, { expires: now });
+  } else {
     const arr = [tokenId];
-    cookies.set("bought", arr, {expires: now});
+    cookies.set('bought', arr, { expires: now });
   }
 }
 
-export function getBought(){
-  return new Set(cookies.get("bought"));
+export function getBought() {
+  return new Set(cookies.get('bought'));
 }
 export function removeAllCookies() {
   cookies.remove(accessIdKey);
   cookies.remove(addressKey);
-  cookies.remove("bought");
+  cookies.remove('bought');
 }
