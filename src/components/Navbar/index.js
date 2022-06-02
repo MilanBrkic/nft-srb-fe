@@ -22,11 +22,11 @@ export default class Navbar extends React.Component {
     this.forceUpdate();
   };
   render() {
-    const show = this.state.accessId && window.location.pathname !== '/nft-srb-fe';
+    const show = this.state.accessId && window.location.pathname !== '/nft-srb-fe/';
     return (
       <>
         <Nav>
-          <NavLink to="/nft-srb-fe">
+          <NavLink to="/nft-srb-fe/">
             <img
               src={require('../../images/nft-srb-bey-lin.png')}
               style={{ visibility: show ? 'visible' : 'hidden' }}
@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
 
           <NavMenu className="nav-menu">
             {this.state.accessId ? (
-              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe">
+              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe/">
                 nft srb
               </Link>
             ) : null}

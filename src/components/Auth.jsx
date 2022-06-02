@@ -47,7 +47,7 @@ class Auth extends React.Component {
            :
           <div>
             <button className="bold-font auth-btn" onClick={this.handleOnConnect}>connect</button> 
-            <Redirect to="/nft-srb-fe"/>
+            <Redirect to="/nft-srb-fe/"/>
           </div>
         }
       </div>
