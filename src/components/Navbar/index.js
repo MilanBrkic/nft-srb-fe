@@ -38,22 +38,22 @@ export default class Navbar extends React.Component {
 
           <NavMenu className="nav-menu">
             {this.state.accessId ? (
-              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/">
+              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe/nft-srb-fe">
                 nft srb
               </Link>
             ) : null}
             {this.state.accessId ? (
-              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/buy-nfts">
+              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe/buy-nfts">
                 buy nfts
               </Link>
             ) : null}
             {this.state.accessId ? (
-              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/my-collection">
+              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe/my-collection">
                 my collection
               </Link>
             ) : null}
             {this.state.accessId ? (
-              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/mint-nfts">
+              <Link className="navbar-link bold-font" onClick={this.onLinkClik} to="/nft-srb-fe/mint-nfts">
                 mint nfts
               </Link>
             ) : null}
