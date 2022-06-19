@@ -163,19 +163,19 @@ class MintComponent extends Component {
   render() {
     return (
       <div className="container-mint">
-          <h3 className='bold-font mint-header'> Mint </h3>
+          <h3 className='bold-font mint-header'> mint </h3>
             <input type="file" className="mint-file" onChange={this.onFileChange} ref={this.fileInput} />
-          <label htmlFor="nft-name">Name</label>
+          <label htmlFor="nft-name">name</label>
           <input type="text" name="" ref={el=>this.inputName = el} id="nft-name" onChange={(event)=>{
             this.state.name = event.target.value;
           }}/>
 
-          <label htmlFor="nft-price">Price in ETH</label>
+          <label htmlFor="nft-price">price in ETH</label>
           <input type="text" name="" ref={el=>this.inputPrice = el} id="nft-price" onChange={(event)=>{
             this.state.price = event.target.value;
           }}/>
 
-          <label htmlFor="nft-description">Description</label>
+          <label htmlFor="nft-description">description</label>
           <textarea name="" ref={el=>this.inputDescription = el} id="nft-description" cols="30" rows="3"
           
           onChange={(event)=>{
@@ -183,7 +183,7 @@ class MintComponent extends Component {
           }}/>
           <div className='mint-btn-div'>
             <button className="mint-btn" onClick={this.handleClick}>
-              Mint
+              mint
             </button>
           </div>
           
